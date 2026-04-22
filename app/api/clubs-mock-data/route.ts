@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
+import type { Club } from "@/types/club";
 
 // usage: fetch("/api/clubs-mock-data");
 export async function GET() {
-  const clubs = [
+  const clubs: Club[] = [
     {
       id: 1,
       name: "Chess Club",
@@ -33,42 +34,50 @@ export async function GET() {
     {
       id: 6,
       name: "Coding Club",
-      description: "A club for programmers to build projects and learn together.",
+      description:
+        "A club for programmers to build projects and learn together.",
     },
     {
       id: 7,
       name: "Music Club",
-      description: "A club for musicians to jam, perform, and improve their skills.",
+      description:
+        "A club for musicians to jam, perform, and improve their skills.",
     },
     {
       id: 8,
       name: "Art Club",
-      description: "A club for artists to create, share, and discuss visual art.",
+      description:
+        "A club for artists to create, share, and discuss visual art.",
     },
     {
       id: 9,
       name: "Robotics Club",
-      description: "A club for students interested in building and programming robots.",
+      description:
+        "A club for students interested in building and programming robots.",
     },
     {
       id: 10,
       name: "Drama Club",
-      description: "A club for theater enthusiasts to act, direct, and produce plays.",
+      description:
+        "A club for theater enthusiasts to act, direct, and produce plays.",
     },
     {
       id: 11,
       name: "Debate Club",
-      description: "A club for students to practice public speaking and critical thinking.",
+      description:
+        "A club for students to practice public speaking and critical thinking.",
     },
     {
       id: 12,
       name: "Science Club",
-      description: "A club for curious minds to explore experiments and discoveries.",
+      description:
+        "A club for curious minds to explore experiments and discoveries.",
     },
     {
       id: 13,
       name: "Gaming Club",
-      description: "A club for gamers to compete, collaborate, and discuss games.",
+      description:
+        "A club for gamers to compete, collaborate, and discuss games.",
     },
     {
       id: 14,
@@ -78,7 +87,8 @@ export async function GET() {
     {
       id: 15,
       name: "Entrepreneurship Club",
-      description: "A club for aspiring founders to develop and pitch business ideas.",
+      description:
+        "A club for aspiring founders to develop and pitch business ideas.",
     },
   ];
   return NextResponse.json(clubs);
