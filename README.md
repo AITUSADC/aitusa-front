@@ -101,7 +101,7 @@ aitusa-front/
 │   └── gallery/
 │       └── page.tsx            # Gallery page (/gallery)
 ├── components/                   # Reusable React components
-│   └── button.tsx              # Button component
+│   └── Button.tsx              # Button component
 ├── public/                       # Static assets (images, etc.)
 ├── package.json                 # Project dependencies and scripts
 ├── tsconfig.json               # TypeScript configuration

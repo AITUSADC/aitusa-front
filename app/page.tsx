@@ -1,3 +1,13 @@
+
+import About from "@/components/sections/About";
+import Header from "@/components/layout/Header"
+
+
 export default function Home() {
-  return <div className="text-brand-blue"> Aitusa main page</div>;
+  return (
+      <>
+          <Header variant="transparent" />
+          <About />
+      </>
+  );
 }
