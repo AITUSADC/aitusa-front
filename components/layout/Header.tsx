@@ -6,10 +6,10 @@ import Button from "@/components/ui/Button";
 
 const navLinks = [
     { label: "Главная", href: "/" },
-    { label: "Клубы", href: "#clubs" },
-    { label: "Галерея", href: "#gallery" },
-    { label: "Рекрутинг", href: "#recruiting" },
-    { label: "Контакты", href: "#contacts" },
+    { label: "Клубы", href: "/clubs" },
+    { label: "Галерея", href: "/gallery" },
+    { label: "Рекрутинг", href: "/recruiting" },
+    { label: "Контакты", href: "/contacts" },
 ];
 
 interface HeaderProps {
