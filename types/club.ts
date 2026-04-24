@@ -3,4 +3,5 @@ export type Club = {
   name: string;
   description: string;
   imageUrl?: string;
+  nameUrl: string;
 };
