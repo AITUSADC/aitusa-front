@@ -48,7 +48,7 @@ export default function ClubsFilter() {
               type="button"
               key={option.value}
               onClick={() => removeSelectedOption(option.value)}
-              className="inline-flex items-center gap-1 bg-blue-100 text-blue-800 text-sm pl-3 pr-1 py-1 rounded-full mr-2 mb-2 hover:bg-blue-200"
+              className="cursor-pointer inline-flex items-center gap-1 bg-blue-100 text-blue-800 text-sm pl-3 pr-1 py-1 rounded-full mr-2 mb-2 hover:bg-blue-200"
               aria-label={`Remove ${option.label}`}
             >
               <span className="leading-none pb-0.5">{option.label}</span>
