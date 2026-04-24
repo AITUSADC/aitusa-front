@@ -12,9 +12,9 @@ export default function ClubsView() {
       .then((data) => setClubs(data));
   }, []);
   return (
-    <section className="mx-20 ">
+    <section className="mx-4 sm:mx-10 lg:mx-20 ">
       <ClubsFilter />
-      <h3 className="text-4xl text-[#444444] font-bold mb-5">Clubs</h3>
+      <h3 className="text-2xl sm:text-3xl lg:text-4xl text-[#444444] font-bold mb-5">Clubs</h3>
       {clubs.map((club) => (
         <ClubCard
           key={club.id}
