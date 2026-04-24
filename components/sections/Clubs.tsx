@@ -21,7 +21,7 @@ export default function ClubsView() {
           name={club.name}
           description={club.description}
           nameUrl={club.nameUrl || ""}
-          imageUrl={club.imageUrl || "/images/placeholders/Placeholder.png"}
+          imageUrl={club.imageUrl || "/images/Placeholder.png"}
         />
       ))}
     </section>
