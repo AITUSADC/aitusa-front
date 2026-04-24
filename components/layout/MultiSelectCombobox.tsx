@@ -1,6 +1,7 @@
 "use client";
 
 import { CheckIcon } from "@heroicons/react/20/solid";
+import { useId } from "react";
 import Select, {
   MultiValue,
   OptionProps,
@@ -107,6 +108,8 @@ export function MultiSelect({
   placeholder = "Search...",
   className,
 }: MultiSelectProps) {
+  const selectId = useId();
+
   return (
     <Select
       isMulti
@@ -116,6 +119,8 @@ export function MultiSelect({
       value={value}
       placeholder={placeholder}
       className={className}
+      instanceId={selectId}
+      inputId={`${selectId}-input`}
       components={{ Option: CheckboxOption }}
       styles={selectStyles}
       closeMenuOnSelect={false}
