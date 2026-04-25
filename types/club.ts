@@ -23,4 +23,5 @@ export type ClubBySlug = {
     description: string;
     list: ClubGoal[]
   };
+  memories: string[]
 };

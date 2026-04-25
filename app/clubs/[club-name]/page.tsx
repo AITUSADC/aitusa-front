@@ -2,6 +2,7 @@
 import Header from "@/components/layout/Header";
 import ClubGoalsSection from "@/components/sections/club/ClubGoalsSection";
 import ClubHeroSection from "@/components/sections/club/ClubHeroSection";
+import ClubMemoriesSection from "@/components/sections/club/ClubMemoriesSection";
 import type { ClubBySlug } from "@/types/club";
 import { useParams } from "next/navigation";
 import React, { useEffect } from "react";
@@ -19,7 +20,7 @@ export default function Club() {
       .catch((error) => console.error("Error fetching club data:", error));
   }, []);
   console.log(clubData);
-  
+
   return (
     <>
       <Header variant="solid" />
@@ -35,6 +36,7 @@ export default function Club() {
             description={clubData.goals.description}
             list={clubData.goals.list}
           />
+          <ClubMemoriesSection memories={clubData.memories} />
         </>
       )}
     </>
