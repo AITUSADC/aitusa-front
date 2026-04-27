@@ -4,6 +4,7 @@ interface ButtonProps {
   href?: string;
   onClick?: () => void;
   variant?: "white" | "blue";
+  className?: string;
   children: React.ReactNode;
 }
 
@@ -11,6 +12,7 @@ export default function Button({
   href,
   onClick,
   variant = "blue",
+  className = "",
   children,
 }: ButtonProps) {
   const base =
@@ -21,14 +23,18 @@ export default function Button({
       ? `${base} bg-white text-[#1285E5] hover:bg-[#1285E5] hover:text-white hover:border-white`
       : `${base} bg-[#1285E5] text-white hover:bg-white hover:text-[#1285E5] hover:border-[#1285E5]`;
 
-  if (href)
+  const combinedClassName = `${styles} ${className}`.trim();
+
+  if (href) {
     return (
-      <Link href={href} className={styles}>
+      <Link href={href} className={combinedClassName}>
         {children}
       </Link>
     );
+  }
+
   return (
-    <button onClick={onClick} className={styles} type="button">
+    <button onClick={onClick} className={combinedClassName} type="button">
       {children}
     </button>
   );
