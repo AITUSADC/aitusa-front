@@ -117,7 +117,7 @@ export default function Footer() {
             <ButtonArrow
               type="submit"
               ariaLabel="Отправить"
-              className="h-12 w-12  text-white shadow-lg shadow-sky-950/15 hover:bg-[#0d74cc] focus:ring-white/40 active:scale-95 sm:h-20 sm:w-20"
+              className="h-12 w-12    sm:h-20 sm:w-20"
             />
           </form>
         </div>

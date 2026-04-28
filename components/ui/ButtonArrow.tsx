@@ -2,6 +2,9 @@ import Link from "next/link";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import type { MouseEventHandler, ReactNode } from "react";
 
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
 interface ButtonArrowProps {
   href?: string;
   onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
@@ -18,8 +21,8 @@ interface ButtonArrowProps {
   prefetch?: boolean;
 }
 
-function cn(...parts: Array<string | undefined | false>) {
-  return parts.filter(Boolean).join(" ");
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
 }
 
 export default function ButtonArrow({
@@ -38,7 +41,7 @@ export default function ButtonArrow({
   prefetch,
 }: ButtonArrowProps) {
   const base =
-    "inline-flex items-center justify-center rounded-full border border-transparent no-underline transition-all duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-4 disabled:cursor-not-allowed disabled:opacity-60";
+    "cursor-pointer flex items-center justify-center rounded-full border border-transparent no-underline transition-all duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-4 disabled:cursor-not-allowed disabled:opacity-60";
 
   const sizeStyles =
     size === "sm" ? "h-10 w-10" : size === "lg" ? "h-20 w-20" : "h-12 w-12";

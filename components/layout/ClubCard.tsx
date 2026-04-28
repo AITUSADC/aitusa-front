@@ -27,8 +27,8 @@ export default function ({ name, description, imageUrl, slug }: ClubCardProps) {
         </h3>
         <p className="text-lg sm:text-xl text-[#444]">{description}</p>
       </div>
-      <div className="">
-        <ButtonArrow href={"clubs/" + slug} variant="white" />
+      <div className="w-20">
+        <ButtonArrow className="w-24 h-24 p-4" size="md" href={"clubs/" + slug} variant="white" />
       </div>
     </div>
   );
