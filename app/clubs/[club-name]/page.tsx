@@ -3,6 +3,7 @@ import Header from "@/components/layout/Header";
 import ClubGoalsSection from "@/components/sections/club/ClubGoalsSection";
 import ClubHeroSection from "@/components/sections/club/ClubHeroSection";
 import ClubMemoriesSection from "@/components/sections/club/ClubMemoriesSection";
+import JoinClubSection from "@/components/sections/club/JoinClubSection";
 import type { ClubBySlug } from "@/types/club";
 import { useParams } from "next/navigation";
 import React, { useEffect } from "react";
@@ -37,6 +38,7 @@ export default function Club() {
             list={clubData.goals.list}
           />
           <ClubMemoriesSection memories={clubData.memories} />
+          <JoinClubSection/>
         </>
       )}
     </>
