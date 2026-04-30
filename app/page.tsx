@@ -1,6 +1,7 @@
 
 import About from "@/components/sections/About";
 import Header from "@/components/layout/Header"
+import Committess from "@/components/sections/Committess";
 
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
       <>
           <Header variant="transparent" />
           <About />
+          <Committess/>
       </>
   );
 }

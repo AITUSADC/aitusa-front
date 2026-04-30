@@ -44,7 +44,7 @@ export default function Hero() {
 
                 <div className="mt-8">
                     <Button href="#clubs" variant="white">
-                        Узнать больше
+                        Стать частью AITUSA
                     </Button>
                 </div>
 
