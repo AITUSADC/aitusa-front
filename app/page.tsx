@@ -2,13 +2,15 @@
 import About from "@/components/sections/About";
 import Header from "@/components/layout/Header"
 import Committess from "@/components/sections/Committess";
-
+import Team from "@/components/sections/Team";
 
 export default function Home() {
   return (
       <>
           <Header variant="transparent" />
           <About />
+
+          <Team/>
           <Committess/>
       </>
   );
