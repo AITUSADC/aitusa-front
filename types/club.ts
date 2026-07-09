@@ -4,6 +4,7 @@ export type ClubListItem = {
   description: string;
   imageUrl?: string;
   slug: string;
+  categories: string[];
 };
 
 export type ClubGoal = {

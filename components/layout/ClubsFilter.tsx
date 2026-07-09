@@ -11,13 +11,34 @@ const options: SelectOption[] = [
   { label: "Netflix reviews", value: "netflix-reviews" },
 ];
 
-export default function ClubsFilter() {
-  const [selected, setSelected] = React.useState<SelectOption[]>([options[1]]);
+type ClubsFilterProps = {
+  filter: ClubFilterType;
+  onFilterChange: (filter: ClubFilterType) => void;
+};
 
+export type ClubFilterType = {
+  searchTerm: string;
+  selectedOptions: SelectOption[];
+};
+
+export default function ClubsFilter({
+  filter,
+  onFilterChange,
+}: ClubsFilterProps) {
   const removeSelectedOption = (valueToRemove: string) => {
-    setSelected((prev) =>
-      prev.filter((option) => option.value !== valueToRemove),
+    const nextSelected = filter.selectedOptions.filter(
+      (option) => option.value !== valueToRemove,
     );
+    onFilterChange({ ...filter, selectedOptions: nextSelected });
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = event.target.value;
+    onFilterChange({ ...filter, searchTerm });
+  };
+
+  const handleMultiSelectChange = (newSelected: SelectOption[]) => {
+    onFilterChange({ ...filter, selectedOptions: newSelected });
   };
 
   return (
@@ -28,14 +49,16 @@ export default function ClubsFilter() {
           <input
             type="text"
             placeholder="Club name or keywords..."
+            value={filter.searchTerm}
+            onChange={handleSearchChange}
             className="h-12 w-full rounded-xl border border-gray-300 bg-white p-3 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
         <div className="w-full md:w-72">
           <MultiSelect
             options={options}
-            value={selected}
-            onChange={setSelected}
+            value={filter.selectedOptions}
+            onChange={handleMultiSelectChange}
             className="w-full h-12"
           />
         </div>
@@ -43,9 +66,9 @@ export default function ClubsFilter() {
           <Button>Search</Button>
         </div>
       </div>
-      {selected.length > 0 && (
+      {filter.selectedOptions.length > 0 && (
         <div className="mt-5 flex flex-wrap">
-          {selected.map((option) => (
+          {filter.selectedOptions.map((option) => (
             <button
               type="button"
               key={option.value}
