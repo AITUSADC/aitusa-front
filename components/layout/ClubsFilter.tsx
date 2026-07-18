@@ -6,9 +6,10 @@ import { MultiSelect, SelectOption } from "./MultiSelectCombobox";
 
 const options: SelectOption[] = [
   { label: "All", value: "all" },
-  { label: "Video interviews", value: "video-interviews" },
-  { label: "Music videos", value: "music-videos" },
-  { label: "Netflix reviews", value: "netflix-reviews" },
+  { label: "Sports", value: "sports" },
+  { label: "Strategy", value: "strategy" },
+  { label: "Literature", value: "literature" },
+  
 ];
 
 type ClubsFilterProps = {
