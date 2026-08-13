@@ -1,6 +1,12 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+
 import Button from "@/components/ui/Button";
+
+const revealText = "Хотите организовывать мероприятия, помогать студентам, создавать контент или налаживать партнерские отношения?";
+
+const revealWords = revealText.split(" ").map((word) => Array.from(word));
 
 const fi: React.CSSProperties = {
     fontFamily: 'SF Pro Display, SF Pro, sans-serif',
@@ -20,6 +26,71 @@ const op: React.CSSProperties = {
 };
 
 export default function Team() {
+    const revealHeadingRef = useRef<HTMLHeadingElement>(null);
+
+    useEffect(() => {
+        const heading = revealHeadingRef.current;
+
+        if (!heading) return;
+
+        const characters = Array.from(
+            heading.querySelectorAll<HTMLElement>("[data-reveal-character]")
+        );
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let animationFrame: number | null = null;
+
+        const updateText = () => {
+            animationFrame = null;
+
+            if (reducedMotion.matches) {
+                characters.forEach((character) => {
+                    character.style.opacity = "1";
+                });
+                return;
+            }
+
+            const rect = heading.getBoundingClientRect();
+            const startPosition = window.innerHeight * 0.85;
+            const endPosition = window.innerHeight * 0.55 - rect.height;
+            const progress = Math.min(
+                Math.max((startPosition - rect.top) / (startPosition - endPosition), 0),
+                1
+            );
+            const lastCharacter = Math.max(characters.length - 1, 1);
+
+            characters.forEach((character, index) => {
+                const characterPosition = index / lastCharacter;
+                const reveal = Math.min(
+                    Math.max((progress - characterPosition * 0.8) / 0.2, 0),
+                    1
+                );
+
+                character.style.opacity = String(0.2 + reveal * 0.8);
+            });
+        };
+
+        const scheduleUpdate = () => {
+            if (animationFrame === null) {
+                animationFrame = window.requestAnimationFrame(updateText);
+            }
+        };
+
+        scheduleUpdate();
+        window.addEventListener("scroll", scheduleUpdate, { passive: true });
+        window.addEventListener("resize", scheduleUpdate);
+        reducedMotion.addEventListener("change", scheduleUpdate);
+
+        return () => {
+            window.removeEventListener("scroll", scheduleUpdate);
+            window.removeEventListener("resize", scheduleUpdate);
+            reducedMotion.removeEventListener("change", scheduleUpdate);
+
+            if (animationFrame !== null) {
+                window.cancelAnimationFrame(animationFrame);
+            }
+        };
+    }, []);
+
     return (
         <div className="bg-[#F5F5F5] min-h-screen">
 
@@ -30,7 +101,7 @@ export default function Team() {
                         {
                             img: "/images/Container.png",
                             name: "Жубаназарова Айназ",
-                            role: <>Президент студенческого самоуправления <span style={{color: '#1285E5'}}>"AITUSA"</span></>
+                            role: <>Президент студенческого самоуправления <span style={{color: '#1285E5'}}>&quot;AITUSA&quot;</span></>
                         },
                         {
                             img: "/images/Container(1).png",
@@ -76,10 +147,30 @@ export default function Team() {
                         <span className="block text-gray-400 text-sm md:text-base mb-4 uppercase tracking-[0.2em] font-medium">
                             О нас
                         </span>
-                        <h2 className="text-[#000000] font-semibold leading-[1.1] tracking-tight max-w-[1200px]"
-                            style={{ fontSize: 'clamp(24px, 4.5vw, 64px)' }}>
-                            Хотите организовывать мероприятия, помогать студентам,
-                            создавать контент <span className="text-gray-300">или налаживать партнерские отношения?</span>
+                        <h2
+                            ref={revealHeadingRef}
+                            aria-label={revealText}
+                            className="text-[#000000] font-semibold leading-[1.1] tracking-tight max-w-[1200px]"
+                            style={{ fontSize: 'clamp(24px, 4.5vw, 64px)' }}
+                        >
+                            <span aria-hidden="true">
+                                {revealWords.map((characters, wordIndex) => (
+                                    <span key={wordIndex}>
+                                        <span className="inline-block">
+                                            {characters.map((character, characterIndex) => (
+                                                <span
+                                                    key={characterIndex}
+                                                    data-reveal-character
+                                                    style={{ opacity: 0.2 }}
+                                                >
+                                                    {character}
+                                                </span>
+                                            ))}
+                                        </span>
+                                        {wordIndex < revealWords.length - 1 && " "}
+                                    </span>
+                                ))}
+                            </span>
                         </h2>
                     </div>
 
