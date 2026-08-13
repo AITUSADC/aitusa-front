@@ -3,13 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import { contactLinks } from "@/data/contacts";
 
 const navLinks = [
     { label: "Главная", href: "/" },
     { label: "Клубы", href: "/clubs" },
     { label: "Галерея", href: "/gallery" },
     { label: "Рекрутинг", href: "/recruiting" },
-    { label: "Контакты", href: "/contacts" },
+    { label: "Контакты", href: "/#footer" },
 ];
 
 interface HeaderProps {
@@ -77,8 +78,9 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
           <div className="flex items-center gap-3 sm:gap-4 shrink-0 z-[110]">
             <div className="hidden sm:block">
               <Button
-                href="#contacts"
+                href={contactLinks.telegramContact}
                 variant={isTransparent || isOpen ? "white" : "blue"}
+                target="_blank"
               >
                 Связаться
               </Button>
@@ -124,7 +126,12 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
             </Link>
           ))}
           <div className="sm:hidden">
-            <Button href="#contacts" variant="white" onClick={closeMenu}>
+            <Button
+              href={contactLinks.telegramContact}
+              variant="white"
+              onClick={closeMenu}
+              target="_blank"
+            >
               Связаться
             </Button>
           </div>

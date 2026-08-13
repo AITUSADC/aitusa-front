@@ -5,6 +5,8 @@ interface ButtonProps {
   onClick?: () => void;
   variant?: "white" | "blue";
   className?: string;
+  target?: "_self" | "_blank";
+  rel?: string;
   children: React.ReactNode;
 }
 
@@ -13,6 +15,8 @@ export default function Button({
   onClick,
   variant = "blue",
   className = "",
+  target,
+  rel,
   children,
 }: ButtonProps) {
   const base =
@@ -26,8 +30,15 @@ export default function Button({
   const combinedClassName = `${styles} ${className}`.trim();
 
   if (href) {
+    const safeRel = target === "_blank" ? (rel ?? "noopener noreferrer") : rel;
+
     return (
-      <Link href={href} className={combinedClassName}>
+      <Link
+        href={href}
+        className={combinedClassName}
+        target={target}
+        rel={safeRel}
+      >
         {children}
       </Link>
     );

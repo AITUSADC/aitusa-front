@@ -10,6 +10,7 @@ import {
 
 import Header from "@/components/layout/Header";
 import { committees, getCommittee } from "@/data/committees";
+import { contactLinks } from "@/data/contacts";
 
 type CommitteePageProps = {
   params: Promise<{ slug: string }>;
@@ -279,7 +280,9 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
               </h2>
               <div className="mt-9 flex flex-wrap gap-3 md:mt-12">
                 <Link
-                  href="/#footer"
+                  href={contactLinks.telegramContact}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#1285E5] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40 md:px-8 md:py-4 md:text-base"
                 >
                   Связаться с командой
