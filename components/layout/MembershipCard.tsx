@@ -1,18 +1,21 @@
 import React from "react";
 import Button from "../ui/Button";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-export default function MembershipCard() {
+type MembershipCardProps = {
+  labels: Dictionary["clubs"];
+};
+
+export default function MembershipCard({ labels }: MembershipCardProps) {
   return (
     <div className="p-6 pt-10 rounded-[40px] bg-white">
       <h3 className="text-2xl  sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3">
-        Card title
+        {labels.membershipTitle}
       </h3>
       <p className="mb-10">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-        commodi corporis laboriosam amet eaque, deserunt nihil perspiciatis.
-        Officiis dolore odio magni! Labore ut aspernatur repellendus?
+        {labels.membershipDescription}
       </p>
-      <Button className="w-full">Some button</Button>
+      <Button className="w-full">{labels.membershipButton}</Button>
     </div>
   );
 }

@@ -3,22 +3,30 @@
 import { useState } from "react";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import LocaleSwitcher from "@/components/ui/LocaleSwitcher";
 import { contactLinks } from "@/data/contacts";
-
-const navLinks = [
-    { label: "Главная", href: "/" },
-    { label: "Клубы", href: "/clubs" },
-    { label: "Галерея", href: "/gallery" },
-    { label: "Контакты", href: "/#footer" },
-];
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 
 interface HeaderProps {
+    locale: Locale;
+    labels: Dictionary["header"];
     variant?: "transparent" | "solid";
 }
 
-export default function Header({ variant = "transparent" }: HeaderProps) {
+export default function Header({
+  locale,
+  labels,
+  variant = "transparent",
+}: HeaderProps) {
     const [isOpen, setIsOpen] = useState(false);
     const isTransparent = variant === "transparent";
+    const navLinks = [
+      { label: labels.home, href: `/${locale}` },
+      { label: labels.clubs, href: `/${locale}/clubs` },
+      { label: labels.gallery, href: `/${locale}/gallery` },
+      { label: labels.contacts, href: `/${locale}/#footer` },
+    ];
 
 
     const closeMenu = () => setIsOpen(false);
@@ -35,7 +43,7 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
             `}
       >
         <div className="max-w-[1728px] mx-auto flex items-center justify-between h-[70px] sm:h-[90px] px-4 sm:px-8 lg:px-14">
-          <Link href="/" className="shrink-0 z-[110]" onClick={closeMenu}>
+          <Link href={`/${locale}`} className="shrink-0 z-[110]" onClick={closeMenu}>
             <img
               src="/aitu_white.svg"
               alt="Astana IT University"
@@ -81,18 +89,20 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
                 variant={isTransparent || isOpen ? "white" : "blue"}
                 target="_blank"
               >
-                Связаться
+                {labels.contact}
               </Button>
             </div>
 
-            <img
-              src="/Flag.svg"
-              alt="RU"
-              className="w-7 h-7 sm:w-9 sm:h-9 rounded-full object-cover"
+            <LocaleSwitcher
+              locale={locale}
+              label={labels.language}
+              solid={!isTransparent && !isOpen}
             />
 
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? labels.closeMenu : labels.openMenu}
+              aria-expanded={isOpen}
               className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 focus:outline-none"
             >
               <span
@@ -131,7 +141,7 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
               onClick={closeMenu}
               target="_blank"
             >
-              Связаться
+              {labels.contact}
             </Button>
           </div>
         </div>

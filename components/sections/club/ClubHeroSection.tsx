@@ -1,4 +1,5 @@
 import Button from "@/components/ui/Button";
+import type { Dictionary } from "@/i18n/dictionaries";
 import React from "react";
 
 interface ClubHeroSectionProps {
@@ -6,6 +7,7 @@ interface ClubHeroSectionProps {
   description: string;
   imageUrl: string;
   status?: "open" | null;
+  labels: Dictionary["clubs"];
 }
 
 export default function ClubHeroSection({
@@ -13,13 +15,14 @@ export default function ClubHeroSection({
   description,
   imageUrl,
   status,
+  labels,
 }: ClubHeroSectionProps) {
   return (
     <section className="mx-4 mt-6 mb-16 rounded-[28px] bg-white p-5 sm:mx-8 sm:p-8 md:mt-8 md:mb-20 md:rounded-[36px] md:p-12 lg:mx-20 lg:mb-24 lg:mt-10 lg:flex lg:items-center lg:gap-16 lg:rounded-[40px] lg:p-16 xl:gap-20">
       <div className="lg:flex-1">
         {status == "open" && (
           <span className="bg-[#f5f5f5] px-2 py-1 text-sm font-semibold rounded-full ">
-            Open call
+            {labels.openCall}
           </span>
         )}
         <h2 className="mt-4 mb-3 text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:mt-5 sm:text-4xl md:mb-4 md:text-5xl lg:mt-6">
@@ -29,7 +32,7 @@ export default function ClubHeroSection({
           {description}
         </p>
 
-        {status == "open" && <Button>Join now</Button>}
+        {status == "open" && <Button>{labels.joinNow}</Button>}
       </div>
       <div className="mt-8 lg:mt-0 lg:flex-1">
         <img

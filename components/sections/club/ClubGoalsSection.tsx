@@ -1,22 +1,25 @@
 import type { ClubGoal } from "@/types/club";
 import Image from "next/image";
 import React from "react";
+import type { Dictionary } from "@/i18n/dictionaries";
 
 interface ClubGoalsSectionProps {
   description: string;
   list: ClubGoal[];
+  title: Dictionary["clubs"]["goals"];
 }
 
 export default function ClubGoalsSection({
   description,
   list,
+  title,
 }: ClubGoalsSectionProps) {
   return (
     <section className="mx-4 mb-16 mt-8 sm:mx-8 md:mt-10 md:mb-20 lg:mx-20 lg:mb-24">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12">
         <div>
           <h2 className="text-3xl font-semibold leading-tight text-neutral-900 sm:text-4xl md:text-5xl">
-            Ключевые цели
+            {title}
           </h2>
           <p className="mt-5 text-base leading-relaxed text-[#444] sm:text-xl">
             {description}

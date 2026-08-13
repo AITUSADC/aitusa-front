@@ -1,22 +1,23 @@
 import Image from "next/image";
+import type { Dictionary } from "@/i18n/dictionaries";
 
 export type Memory = {
     url: string;
     description: string;
 };
 
-export const memories: Memory[] = [
-    {
-        url: "/images/Rectangle 15.png",
-        description: "Команда AITUSA — вместе создаем студенческую жизнь",
-    },
-    {
-        url: "/images/IMG.png",
-        description: "Моменты, которые объединяют нас",
-    },
-];
+const memoryImages = ["/images/Rectangle 15.png", "/images/IMG.png"];
 
-export default function Memories() {
+type MemoriesProps = {
+    labels: Dictionary["home"]["memories"];
+};
+
+export default function Memories({ labels }: MemoriesProps) {
+    const memories: Memory[] = memoryImages.map((url, index) => ({
+        url,
+        description: labels.descriptions[index],
+    }));
+
     return (
         <section
             id="memories"
@@ -27,7 +28,7 @@ export default function Memories() {
                 id="memories-heading"
                 className="mb-10 text-center text-[32px] font-semibold md:mb-20 md:text-[40px]"
             >
-                Memories
+                {labels.title}
             </h2>
 
             <div className="grid gap-3 md:grid-cols-2 md:gap-5">

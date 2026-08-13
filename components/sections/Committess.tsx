@@ -1,8 +1,17 @@
 import Button from "@/components/ui/Button";
-import { committees } from "@/data/committees";
+import { getCommittees } from "@/data/committees";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 import Image from "next/image";
 
-export default function Committees() {
+type CommitteesProps = {
+    locale: Locale;
+    labels: Dictionary["home"]["committees"];
+};
+
+export default function Committees({ locale, labels }: CommitteesProps) {
+    const committees = getCommittees(locale);
+
     return (
         <section
             id="committees"
@@ -13,7 +22,7 @@ export default function Committees() {
                 id="committees-heading"
                 className="mb-10 text-center text-[32px] font-semibold md:mb-20 md:text-[40px]"
             >
-                Комитеты
+                {labels.title}
             </h2>
 
             <div className="grid grid-cols-2 gap-3 md:gap-5 lg:grid-cols-4">
@@ -53,11 +62,11 @@ export default function Committees() {
                                 {committee.cardDescription}
                             </p>
                             <Button
-                                href={`/committees/${committee.slug}`}
+                                href={`/${locale}/committees/${committee.slug}`}
                                 variant="white"
                                 className="!w-fit !px-4 !py-2 !text-xs md:!px-5 md:!text-sm"
                             >
-                                Подробнее
+                                {labels.details}
                             </Button>
                         </div>
                     </article>

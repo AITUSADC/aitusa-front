@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import type { ClubBySlug } from "@/types/club";
+import { getClubCopy, getClubGoals } from "@/data/club-translations";
+import { defaultLocale, hasLocale } from "@/i18n/config";
 
 function createClubGoals(clubName: string): ClubBySlug["goals"] {
   const placeholderImages = [
@@ -185,13 +187,27 @@ export async function GET(request: Request) {
   ];
 
   const { searchParams } = new URL(request.url);
+  const lang = searchParams.get("lang") ?? defaultLocale;
+  const locale = hasLocale(lang) ? lang : defaultLocale;
+  const localizedClubs = clubs.map((club) => {
+    const copy = getClubCopy(club.slug, locale, {
+      name: club.name,
+      description: club.description,
+    });
+
+    return {
+      ...club,
+      ...copy,
+      goals: getClubGoals(copy.name, locale),
+    };
+  });
   const slug = searchParams.get("slug") ?? searchParams.get("nameUrl");
 
   if (!slug) {
-    return NextResponse.json(clubs);
+    return NextResponse.json(localizedClubs);
   }
 
-  const club = clubs.find(
+  const club = localizedClubs.find(
     (item) => item.slug.toLowerCase() === slug.toLowerCase(),
   );
 

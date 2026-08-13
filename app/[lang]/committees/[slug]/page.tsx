@@ -9,27 +9,35 @@ import {
 } from "@heroicons/react/24/outline";
 
 import Header from "@/components/layout/Header";
-import { committees, getCommittee } from "@/data/committees";
+import { committeeSlugs, getCommittee, getCommittees } from "@/data/committees";
 import { contactLinks } from "@/data/contacts";
+import { getDictionary } from "@/i18n/dictionaries";
+import { hasLocale, locales } from "@/i18n/config";
 
 type CommitteePageProps = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ lang: string; slug: string }>;
 };
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return committees.map(({ slug }) => ({ slug }));
+  return locales.flatMap((lang) =>
+    committeeSlugs.map((slug) => ({ lang, slug })),
+  );
 }
 
 export async function generateMetadata({
   params,
 }: CommitteePageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const committee = getCommittee(slug);
+  const { lang, slug } = await params;
+
+  if (!hasLocale(lang)) return {};
+
+  const committee = getCommittee(slug, lang);
+  const dictionary = getDictionary(lang);
 
   if (!committee) {
-    return { title: "Комитет не найден | AITUSA" };
+    return { title: `${dictionary.committeePage.notFound} | AITUSA` };
   }
 
   return {
@@ -39,29 +47,35 @@ export async function generateMetadata({
 }
 
 export default async function CommitteePage({ params }: CommitteePageProps) {
-  const { slug } = await params;
-  const committee = getCommittee(slug);
+  const { lang, slug } = await params;
+
+  if (!hasLocale(lang)) notFound();
+
+  const committee = getCommittee(slug, lang);
 
   if (!committee) {
     notFound();
   }
 
-  const relatedCommittees = committees
+  const dictionary = getDictionary(lang);
+  const labels = dictionary.committeePage;
+
+  const relatedCommittees = getCommittees(lang)
     .filter(({ slug: committeeSlug }) => committeeSlug !== slug)
     .slice(0, 3);
 
   return (
     <>
-      <Header variant="solid" />
+      <Header locale={lang} labels={dictionary.header} variant="solid" />
 
       <main className="overflow-hidden bg-[#f5f5f5] text-black">
         <section className="mx-auto w-full max-w-[1729px] px-5 pb-10 pt-6 md:px-20 md:pb-16 md:pt-10">
           <Link
-            href="/#committees"
+            href={`/${lang}/#committees`}
             className="mb-6 inline-flex items-center gap-2 rounded-full px-1 py-2 text-sm font-semibold text-[#444] transition-colors hover:text-[#1285E5] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#1285E5]/20 md:mb-10 md:text-base"
           >
             <ArrowLeftIcon className="h-5 w-5" aria-hidden="true" />
-            Все комитеты
+            {labels.all}
           </Link>
 
           <div className="relative min-h-[560px] overflow-hidden rounded-[32px] bg-[#1285E5] shadow-[0_24px_80px_rgba(18,133,229,0.16)] md:min-h-[680px] md:rounded-[48px]">
@@ -80,7 +94,7 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
             <div className="relative z-10 flex min-h-[560px] flex-col justify-between p-6 text-white md:min-h-[680px] md:p-12 lg:p-16">
               <div className="flex items-start justify-between gap-4">
                 <span className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] backdrop-blur-md md:text-sm">
-                  Комитет AITUSA
+                  {labels.badge}
                 </span>
                 <span className="text-3xl font-semibold tracking-tight text-white/65 md:text-5xl">
                   {String(committee.id).padStart(2, "0")}
@@ -106,7 +120,7 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
           <div className="lg:col-span-3">
             <div className="lg:sticky lg:top-10">
               <span className="inline-flex rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#666]">
-                О комитете
+                {labels.about}
               </span>
             </div>
           </div>
@@ -138,13 +152,13 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
           <div className="mb-8 flex items-end justify-between gap-6 md:mb-12">
             <div>
               <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1285E5]">
-                Чем мы занимаемся
+                {labels.whatWeDo}
               </span>
               <h2
                 id="committee-directions-title"
                 className="mt-3 text-[clamp(32px,4vw,64px)] font-semibold leading-none tracking-[-0.04em]"
               >
-                Главные направления
+                {labels.directions}
               </h2>
             </div>
           </div>
@@ -182,13 +196,13 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
         >
           <div className="mb-8 md:mb-12">
             <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1285E5]">
-              Внутри команды
+              {labels.inside}
             </span>
             <h2
               id="committee-gallery-title"
               className="mt-3 text-[clamp(32px,4vw,64px)] font-semibold leading-none tracking-[-0.04em]"
             >
-              Люди, идеи, моменты
+              {labels.moments}
             </h2>
           </div>
 
@@ -227,20 +241,20 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
           <div className="flex items-end justify-between gap-4">
             <div>
               <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1285E5]">
-                Продолжить знакомство
+                {labels.continue}
               </span>
               <h2
                 id="related-committees-title"
                 className="mt-3 text-[clamp(30px,3.5vw,56px)] font-semibold leading-none tracking-[-0.04em]"
               >
-                Другие комитеты
+                {labels.other}
               </h2>
             </div>
             <Link
-              href="/#committees"
+              href={`/${lang}/#committees`}
               className="hidden items-center gap-2 text-sm font-semibold text-[#444] transition-colors hover:text-[#1285E5] sm:flex"
             >
-              Смотреть все
+              {labels.viewAll}
               <ArrowRightIcon className="h-5 w-5" aria-hidden="true" />
             </Link>
           </div>
@@ -249,7 +263,7 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
             {relatedCommittees.map((related, index) => (
               <Link
                 key={related.slug}
-                href={`/committees/${related.slug}`}
+                href={`/${lang}/committees/${related.slug}`}
                 className="group grid grid-cols-[48px_1fr_44px] items-center gap-3 py-5 md:grid-cols-[80px_1fr_56px] md:py-7"
               >
                 <span className="text-sm font-semibold text-[#999]">
@@ -273,7 +287,7 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
 
             <div className="relative max-w-[1040px]">
               <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/70">
-                Стань частью команды
+                {labels.join}
               </span>
               <h2 className="mt-4 text-[clamp(34px,5vw,76px)] font-semibold leading-[1.02] tracking-[-0.04em]">
                 {committee.cta}
@@ -285,14 +299,14 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#1285E5] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/40 md:px-8 md:py-4 md:text-base"
                 >
-                  Связаться с командой
+                  {labels.contact}
                   <ArrowRightIcon className="h-5 w-5" aria-hidden="true" />
                 </Link>
                 <Link
-                  href="/#committees"
+                  href={`/${lang}/#committees`}
                   className="inline-flex items-center rounded-full border border-white/35 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/30 md:px-8 md:py-4 md:text-base"
                 >
-                  Все комитеты
+                  {labels.all}
                 </Link>
               </div>
             </div>

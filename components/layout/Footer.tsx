@@ -3,13 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { contactLinks } from "@/data/contacts";
-
-const navLinks = [
-  { label: "Главная", href: "/" },
-  { label: "Клубы", href: "/clubs" },
-  { label: "Галерея", href: "/gallery" },
-  { label: "Контакты", href: "/#footer" },
-];
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 
 const socialLinks = [
   {
@@ -38,7 +33,20 @@ const socialLinks = [
   },
 ];
 
-export default function Footer() {
+type FooterProps = {
+  locale: Locale;
+  labels: Dictionary["footer"];
+  navigation: Dictionary["header"];
+};
+
+export default function Footer({ locale, labels, navigation }: FooterProps) {
+  const navLinks = [
+    { label: navigation.home, href: `/${locale}` },
+    { label: navigation.clubs, href: `/${locale}/clubs` },
+    { label: navigation.gallery, href: `/${locale}/gallery` },
+    { label: navigation.contacts, href: `/${locale}/#footer` },
+  ];
+
   return (
     <footer
       id="footer"
@@ -63,14 +71,13 @@ export default function Footer() {
             id="footer-cta-title"
             className="text-2xl font-semibold leading-tight sm:text-3xl lg:text-4xl"
           >
-            Остались вопросы?
+            {labels.questions}
           </h3>
           <p
             id="footer-cta-description"
             className="mx-auto mt-3 max-w-[760px] text-sm font-medium leading-snug text-white/90 sm:text-xl lg:text-2xl"
           >
-            Свяжитесь с нами. Мы ответим на вопросы,
-            расскажем о направлениях и поможем понять, как присоединиться.
+            {labels.description}
           </p>
 
           <a
@@ -80,7 +87,7 @@ export default function Footer() {
             aria-describedby="footer-cta-description"
             className="mx-auto mt-9 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#1285E5] shadow-lg shadow-sky-950/10 transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-white/40 sm:mt-10 sm:px-8 sm:py-4 sm:text-lg"
           >
-            Написать в Telegram
+            {labels.telegramButton}
             <PaperAirplaneIcon className="h-5 w-5" aria-hidden="true" />
           </a>
         </div>
@@ -90,7 +97,7 @@ export default function Footer() {
         <div className="mx-auto max-w-[1555px]">
           <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
             <Link
-              href="/"
+              href={`/${locale}`}
               className="inline-flex w-fit rounded-md focus:outline-none focus:ring-4 focus:ring-white/40"
               aria-label="Astana IT University"
             >
@@ -124,10 +131,10 @@ export default function Footer() {
           <div className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-base font-semibold text-white sm:text-lg">
-                AITUSA на связи
+                {labels.online}
               </p>
               <p className="mt-1 text-sm text-white/75">
-                Новости, события и студенческая жизнь
+                {labels.socialDescription}
               </p>
             </div>
 

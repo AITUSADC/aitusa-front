@@ -1,9 +1,12 @@
-"use client";
-
-import Link from "next/link";
 import Button from "@/components/ui/Button";
+import { contactLinks } from "@/data/contacts";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-export default function Hero() {
+type HeroProps = {
+    labels: Dictionary["home"]["about"];
+};
+
+export default function Hero({ labels }: HeroProps) {
     return (
         <section className="relative w-full min-h-screen overflow-hidden flex items-center justify-center bg-[#1285E5]">
 
@@ -37,14 +40,17 @@ export default function Hero() {
                         lineHeight: 1.4
                     }}
                 >
-                    Это студенческое самоуправление Astana IT University, которое
-                    объединяет активных студентов, клубы и инициативы
+                    {labels.description}
                 </p>
 
 
                 <div className="mt-8">
-                    <Button href="#clubs" variant="white">
-                        Стать частью AITUSA
+                    <Button
+                        href={contactLinks.telegramContact}
+                        variant="white"
+                        target="_blank"
+                    >
+                        {labels.join}
                     </Button>
                 </div>
 
