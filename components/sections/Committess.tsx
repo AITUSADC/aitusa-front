@@ -1,82 +1,6 @@
 import Button from "@/components/ui/Button";
+import { committees } from "@/data/committees";
 import Image from "next/image";
-
-type Committee = {
-    id: number;
-    title: string;
-    description: string;
-    imageUrl: string;
-    href: string;
-    isBlue: boolean;
-    wide?: boolean;
-};
-
-const committees: Committee[] = [
-    {
-        id: 1,
-        title: "Социальная деятельность",
-        description:
-            "Поддерживаем студентов, развиваем волонтерские инициативы и создаем полезные социальные проекты.",
-        imageUrl: "/committees/soc_cul_dig.png",
-        href: "/clubs",
-        isBlue: true,
-    },
-    {
-        id: 2,
-        title: "СМИ",
-        description:
-            "Рассказываем о жизни университета, снимаем контент и формируем узнаваемый образ AITUSA.",
-        imageUrl: "/committees/smi.png",
-        href: "/clubs",
-        isBlue: false,
-    },
-    {
-        id: 3,
-        title: "Культурно-массовая деятельность",
-        description:
-            "Придумываем и проводим события, которые объединяют студентов и становятся яркими воспоминаниями.",
-        imageUrl: "/committees/soc_cul_dig.png",
-        href: "/clubs",
-        isBlue: true,
-    },
-    {
-        id: 4,
-        title: "Внешние связи",
-        description:
-            "Развиваем партнерства, представляем AITUSA за пределами университета и открываем новые возможности.",
-        imageUrl: "/committees/vneshie.png",
-        href: "/clubs",
-        isBlue: false,
-    },
-    {
-        id: 5,
-        title: "Академическая деятельность",
-        description:
-            "Помогаем решать учебные вопросы и делаем образовательную среду понятнее и комфортнее.",
-        imageUrl: "/committees/academ.png",
-        href: "/clubs",
-        isBlue: false,
-    },
-    {
-        id: 6,
-        title: "Цифровизация",
-        description:
-            "Создаем цифровые решения и автоматизируем процессы студенческого самоуправления.",
-        imageUrl: "/committees/soc_cul_dig.png",
-        href: "/clubs",
-        isBlue: true,
-    },
-    {
-        id: 7,
-        title: "Научная и инновационная деятельность",
-        description:
-            "Объединяем молодых исследователей, поддерживаем научные идеи и помогаем запускать инновационные проекты.",
-        imageUrl: "/committees/sciense.png",
-        href: "/clubs",
-        isBlue: false,
-        wide: true,
-    },
-];
 
 export default function Committees() {
     return (
@@ -126,10 +50,10 @@ export default function Committees() {
 
                         <div className="absolute inset-0 z-20 flex flex-col justify-between bg-[#1285E5] p-4 text-left opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 md:p-8">
                             <p className="text-xs font-medium leading-snug text-white sm:text-sm md:text-base md:leading-relaxed">
-                                {committee.description}
+                                {committee.cardDescription}
                             </p>
                             <Button
-                                href={committee.href}
+                                href={`/committees/${committee.slug}`}
                                 variant="white"
                                 className="!w-fit !px-4 !py-2 !text-xs md:!px-5 md:!text-sm"
                             >

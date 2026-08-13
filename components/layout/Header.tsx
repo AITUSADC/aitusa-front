@@ -37,12 +37,22 @@ export default function Header({ variant = "transparent" }: HeaderProps) {
         <div className="max-w-[1728px] mx-auto flex items-center justify-between h-[70px] sm:h-[90px] px-4 sm:px-8 lg:px-14">
           <Link href="/" className="shrink-0 z-[110]" onClick={closeMenu}>
             <img
-              src={
-                isTransparent || isOpen ? "/aitu_white.svg" : "/aitu_blue.svg"
-              }
+              src="/aitu_white.svg"
               alt="Astana IT University"
-              className="h-10 sm:h-[52px] w-auto block"
+              className={`h-10 w-auto sm:h-[52px] ${
+                isTransparent || isOpen
+                  ? "block"
+                  : "block md:hidden"
+              }`}
             />
+            {!isTransparent && !isOpen && (
+              <img
+                src="/aitu_blue.svg"
+                alt=""
+                aria-hidden="true"
+                className="hidden h-10 w-auto sm:h-[52px] md:block"
+              />
+            )}
           </Link>
 
           <nav className="hidden md:flex items-center gap-6 lg:gap-10">
