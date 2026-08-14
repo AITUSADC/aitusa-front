@@ -1,9 +1,7 @@
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import Link from "next/link";
 
 import { contactLinks } from "@/data/contacts";
-import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 
 const socialLinks = [
@@ -34,19 +32,10 @@ const socialLinks = [
 ];
 
 type FooterProps = {
-  locale: Locale;
   labels: Dictionary["footer"];
-  navigation: Dictionary["header"];
 };
 
-export default function Footer({ locale, labels, navigation }: FooterProps) {
-  const navLinks = [
-    { label: navigation.home, href: `/${locale}` },
-    { label: navigation.clubs, href: `/${locale}/clubs` },
-    { label: navigation.gallery, href: `/${locale}/gallery` },
-    { label: navigation.contacts, href: `/${locale}/#footer` },
-  ];
-
+export default function Footer({ labels }: FooterProps) {
   return (
     <footer
       id="footer"
@@ -95,40 +84,7 @@ export default function Footer({ locale, labels, navigation }: FooterProps) {
 
       <section className="bg-[linear-gradient(105deg,#82bee8_0%,#1285e5_15%,#edf6fc_48%,#f5f5f5_100%)] px-4 py-6 sm:px-6 sm:py-6 lg:px-20">
         <div className="mx-auto max-w-[1555px]">
-          <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <Link
-              href={`/${locale}`}
-              className="inline-flex w-fit rounded-md focus:outline-none focus:ring-4 focus:ring-white/40"
-              aria-label="Astana IT University"
-            >
-              <Image
-                src="/aitu_white.svg"
-                alt="Astana IT University"
-                width={280}
-                height={56}
-                className="h-12 w-auto sm:h-14"
-              />
-            </Link>
-
-            <nav
-              aria-label="Footer navigation"
-              className="flex flex-wrap gap-x-7 gap-y-3 text-md font-medium text-[#444] sm:gap-x-8 sm:text-lg"
-            >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="text-md rounded-md transition hover:text-[#1285E5] focus:outline-none focus:ring-4 focus:ring-[#1285E5]/20"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          <div className="mt-6  mb-6 h-px w-full bg-black/10" />
-
-          <div className="mt-6 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-base font-semibold text-white sm:text-lg">
                 {labels.online}

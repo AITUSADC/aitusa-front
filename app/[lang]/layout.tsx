@@ -58,11 +58,7 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-[var(--color-brand-cream)] text-[var(--color-brand-black)]">
         {children}
-        <Footer
-          locale={lang}
-          labels={dictionary.footer}
-          navigation={dictionary.header}
-        />
+        <Footer labels={dictionary.footer} />
       </body>
     </html>
   );
