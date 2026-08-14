@@ -119,6 +119,15 @@ export default function Header({
         </div>
 
         <div
+          aria-hidden="true"
+          className={`pointer-events-none absolute inset-x-0 bottom-0 h-px ${
+            isTransparent || isOpen
+              ? "bg-white/25"
+              : "bg-white/25 md:bg-[#1285E5]/20"
+          }`}
+        />
+
+        <div
           className={`
                     fixed inset-0 bg-[#1285E5] z-[105] flex flex-col items-center justify-center gap-8 transition-transform duration-500 md:hidden
                     ${isOpen ? "translate-y-0" : "-translate-y-full"}
