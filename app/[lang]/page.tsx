@@ -1,8 +1,7 @@
 
+import Header from "@/components/layout/Header";
 import About from "@/components/sections/About";
-import Header from "@/components/layout/Header"
 import Committess from "@/components/sections/Committess";
-import Memories from "@/components/sections/Memories";
 import Team from "@/components/sections/Team";
 import { getDictionary } from "@/i18n/dictionaries";
 import { hasLocale } from "@/i18n/config";
@@ -18,13 +17,11 @@ export default async function Home({
   const dictionary = getDictionary(lang);
 
   return (
-      <>
-          <Header locale={lang} labels={dictionary.header} variant="transparent" />
-          <About labels={dictionary.home.about} />
-
-          <Team labels={dictionary.home.team} />
-          <Committess locale={lang} labels={dictionary.home.committees} />
-          <Memories labels={dictionary.home.memories} />
-      </>
+    <>
+      <Header locale={lang} labels={dictionary.header} variant="transparent" />
+      <About labels={dictionary.home.about} />
+      <Team labels={dictionary.home.team} />
+      <Committess locale={lang} labels={dictionary.home.committees} />
+    </>
   );
 }

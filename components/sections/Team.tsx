@@ -33,6 +33,9 @@ const memberImages = [
     "/images/Container(3).png",
 ];
 
+const sectionShell =
+    "mx-auto w-full max-w-[1729px] px-5 md:px-10 lg:px-20";
+
 export default function Team({ labels }: TeamProps) {
     const revealHeadingRef = useRef<HTMLHeadingElement>(null);
     const revealWords = useMemo(
@@ -104,23 +107,28 @@ export default function Team({ labels }: TeamProps) {
     }, [labels.revealText]);
 
     return (
-        <div className="bg-[#F5F5F5] min-h-screen">
+        <div className="bg-[#F5F5F5]">
 
 
-            <section className="w-full py-20 md:py-[200px] px-6 md:px-[80px] flex justify-center">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full max-w-[1569px]">
+            <section className={`${sectionShell} py-20 md:py-28`}>
+                <div className="mx-auto grid w-full max-w-[1569px] grid-cols-1 gap-12 md:grid-cols-3 md:gap-5">
                     {labels.members.map((member, i) => (
                         <div key={i} className="flex flex-col w-full">
-                            <div className="w-full aspect-[3/4] overflow-hidden bg-gray-100 rounded-[40px]">
+                            <div className="aspect-[3/4] w-full overflow-hidden rounded-[28px] bg-gray-100 md:rounded-[40px]">
                                 <img
                                     src={memberImages[i]}
                                     alt={member.name}
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <div className="w-full flex flex-col items-center pt-4 text-center">
-                                <h3 style={fi}>{member.name}</h3>
-                                <p style={op}>
+                            <div className="flex w-full flex-col items-center pt-5 text-center">
+                                <h3
+                                    style={fi}
+                                    className="text-balance md:flex md:min-h-[102px] md:items-center md:justify-center"
+                                >
+                                    {member.name}
+                                </h3>
+                                <p style={op} className="max-w-[440px] text-pretty">
                                     {member.role}
                                     {member.brand && (
                                         <> <span style={{color: '#1285E5'}}>&quot;{member.brand}&quot;</span></>
@@ -133,25 +141,27 @@ export default function Team({ labels }: TeamProps) {
             </section>
 
 
-            <div className="w-full">
-                <img
-                    src="/images/Rectangle 15.png"
-                    className="w-full h-auto block"
-                    alt={labels.bannerAlt}
-                />
+            <div className={sectionShell}>
+                <div className="mx-auto w-full max-w-[1569px] overflow-hidden rounded-[28px] md:rounded-[40px]">
+                    <img
+                        src="/images/Rectangle 15.png"
+                        className="block h-auto w-full"
+                        alt={labels.bannerAlt}
+                    />
+                </div>
             </div>
 
 
-            <section className="w-full py-20 md:py-[200px] px-6 md:px-[80px] flex justify-center">
-                <div className="w-full max-w-[1569px] bg-white rounded-[40px] p-8 md:p-[64px] flex flex-col items-center shadow-sm">
-                    <div className="text-center mb-12">
+            <section className={`${sectionShell} py-20 md:py-28`}>
+                <div className="mx-auto flex w-full max-w-[1569px] flex-col items-center rounded-[28px] bg-white p-6 shadow-sm sm:p-8 md:rounded-[40px] md:p-12 lg:p-16">
+                    <div className="mb-10 text-center md:mb-12">
                         <span className="block text-gray-400 text-sm md:text-base mb-4 uppercase tracking-[0.2em] font-medium">
                             {labels.eyebrow}
                         </span>
                         <h2
                             ref={revealHeadingRef}
                             aria-label={labels.revealText}
-                            className="text-[#000000] font-semibold leading-[1.1] tracking-tight max-w-[1200px]"
+                            className="max-w-[1200px] text-balance font-semibold leading-[1.1] tracking-tight text-[#000000]"
                             style={{ fontSize: 'clamp(24px, 4.5vw, 64px)' }}
                         >
                             <span aria-hidden="true">
@@ -175,8 +185,8 @@ export default function Team({ labels }: TeamProps) {
                         </h2>
                     </div>
 
-                    <div className="w-full relative">
-                        <div className="w-full aspect-video md:aspect-[21/9] overflow-hidden rounded-[32px] md:rounded-[40px]">
+                    <div className="relative w-full">
+                        <div className="aspect-video w-full overflow-hidden rounded-[24px] md:aspect-[21/9] md:rounded-[32px]">
                             <img
                                 src="/images/IMG.png"
                                 alt={labels.joinImageAlt}
@@ -199,12 +209,14 @@ export default function Team({ labels }: TeamProps) {
 
 
 
-            <div className="w-full">
-                <img
-                    src="/images/Rectangle 14.svg"
-                    className="w-full h-auto block"
-                    alt={labels.footerBannerAlt}
-                />
+            <div className={sectionShell}>
+                <div className="mx-auto w-full max-w-[1569px] overflow-hidden rounded-[28px] md:rounded-[40px]">
+                    <img
+                        src="/images/Rectangle 14.svg"
+                        className="block h-auto w-full"
+                        alt={labels.footerBannerAlt}
+                    />
+                </div>
             </div>
 
         </div>

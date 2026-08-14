@@ -34,7 +34,6 @@ export type Dictionary = {
       footerBannerAlt: string;
     };
     committees: { title: string; details: string };
-    memories: { title: string; descriptions: string[] };
   };
   committeePage: {
     notFound: string;
@@ -111,10 +110,6 @@ const en: Dictionary = {
       footerBannerAlt: "AITUSA community",
     },
     committees: { title: "Committees", details: "Learn more" },
-    memories: {
-      title: "Memories",
-      descriptions: ["The AITUSA team — shaping student life together", "Moments that bring us together"],
-    },
   },
   committeePage: {
     notFound: "Committee not found",
@@ -194,10 +189,6 @@ const ru: Dictionary = {
       footerBannerAlt: "Сообщество AITUSA",
     },
     committees: { title: "Комитеты", details: "Подробнее" },
-    memories: {
-      title: "Воспоминания",
-      descriptions: ["Команда AITUSA — вместе создаём студенческую жизнь", "Моменты, которые объединяют нас"],
-    },
   },
   committeePage: {
     notFound: "Комитет не найден",
@@ -277,10 +268,6 @@ const kk: Dictionary = {
       footerBannerAlt: "AITUSA қауымдастығы",
     },
     committees: { title: "Комитеттер", details: "Толығырақ" },
-    memories: {
-      title: "Естеліктер",
-      descriptions: ["AITUSA командасы — студенттік өмірді бірге қалыптастырамыз", "Бізді біріктіретін сәттер"],
-    },
   },
   committeePage: {
     notFound: "Комитет табылмады",

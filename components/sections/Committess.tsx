@@ -16,11 +16,11 @@ export default function Committees({ locale, labels }: CommitteesProps) {
         <section
             id="committees"
             aria-labelledby="committees-heading"
-            className="mx-auto w-full max-w-[1729px] px-5 py-16 md:px-20 md:pb-[120px]"
+            className="mx-auto w-full max-w-[1729px] px-5 py-20 md:px-10 md:py-28 lg:px-20"
         >
             <h2
                 id="committees-heading"
-                className="mb-10 text-center text-[32px] font-semibold md:mb-20 md:text-[40px]"
+                className="mb-10 text-balance text-center text-[clamp(32px,4vw,56px)] font-semibold leading-none tracking-[-0.035em] md:mb-14"
             >
                 {labels.title}
             </h2>
@@ -49,7 +49,7 @@ export default function Committees({ locale, labels }: CommitteesProps) {
 
                         <div className="relative z-10 flex h-full flex-col justify-end p-4 text-left transition-opacity duration-300 group-hover:opacity-0 group-focus-within:opacity-0 md:p-8">
                             <h3
-                                className={`text-[13px] font-bold leading-tight sm:text-[16px] md:text-[22px] ${
+                                className={`text-balance text-[13px] font-bold leading-tight sm:text-[16px] md:text-[22px] ${
                                     committee.isBlue ? "text-white" : "text-black"
                                 }`}
                             >

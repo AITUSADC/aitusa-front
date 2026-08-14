@@ -39,7 +39,7 @@ export default function Footer({ labels }: FooterProps) {
   return (
     <footer
       id="footer"
-      className="mt-16 scroll-mt-6 overflow-hidden bg-[#f5f5f5] sm:mt-48"
+      className="scroll-mt-6 overflow-hidden bg-[#f5f5f5]"
     >
       <section
         aria-labelledby="footer-cta-title"
