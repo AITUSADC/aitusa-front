@@ -107,7 +107,7 @@ export const committees: Committee[] = [
       "Придумываем и проводим события, которые объединяют студентов и становятся яркими воспоминаниями.",
     imageUrl: "/committees/soc_cul_dig.png",
     isBlue: true,
-    heroImage: "/images/Rectangle 15.png",
+    heroImage: "/committees/cult-mass/hero.jpg",
     heroImagePosition: "center 35%",
     statement: "Создаём события, после которых у студентов остаются новые знакомства, эмоции и общие воспоминания.",
     about: [
