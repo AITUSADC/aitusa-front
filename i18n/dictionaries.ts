@@ -45,9 +45,6 @@ export type Dictionary = {
     directions: string;
     inside: string;
     moments: string;
-    continue: string;
-    other: string;
-    viewAll: string;
     join: string;
     contact: string;
   };
@@ -121,16 +118,13 @@ const en: Dictionary = {
   },
   committeePage: {
     notFound: "Committee not found",
-    all: "All committees",
+    all: "Back to committees",
     badge: "AITUSA Committee",
     about: "About the committee",
     whatWeDo: "What we do",
     directions: "Key areas",
     inside: "Inside the team",
     moments: "People, ideas, moments",
-    continue: "Keep exploring",
-    other: "Other committees",
-    viewAll: "View all",
     join: "Join the team",
     contact: "Contact the team",
   },
@@ -207,16 +201,13 @@ const ru: Dictionary = {
   },
   committeePage: {
     notFound: "Комитет не найден",
-    all: "Все комитеты",
+    all: "Вернуться к комитетам",
     badge: "Комитет AITUSA",
     about: "О комитете",
     whatWeDo: "Чем мы занимаемся",
     directions: "Главные направления",
     inside: "Внутри команды",
     moments: "Люди, идеи, моменты",
-    continue: "Продолжить знакомство",
-    other: "Другие комитеты",
-    viewAll: "Смотреть все",
     join: "Стань частью команды",
     contact: "Связаться с командой",
   },
@@ -293,16 +284,13 @@ const kk: Dictionary = {
   },
   committeePage: {
     notFound: "Комитет табылмады",
-    all: "Барлық комитеттер",
+    all: "Комитеттерге оралу",
     badge: "AITUSA комитеті",
     about: "Комитет туралы",
     whatWeDo: "Біздің қызметіміз",
     directions: "Негізгі бағыттар",
     inside: "Команда ішінде",
     moments: "Адамдар, идеялар, сәттер",
-    continue: "Танысуды жалғастыру",
-    other: "Басқа комитеттер",
-    viewAll: "Барлығын көру",
     join: "Командаға қосыл",
     contact: "Командамен байланысу",
   },

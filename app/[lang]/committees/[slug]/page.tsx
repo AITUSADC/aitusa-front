@@ -9,7 +9,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import Header from "@/components/layout/Header";
-import { committeeSlugs, getCommittee, getCommittees } from "@/data/committees";
+import { committeeSlugs, getCommittee } from "@/data/committees";
 import { contactLinks } from "@/data/contacts";
 import { getDictionary } from "@/i18n/dictionaries";
 import { hasLocale, locales } from "@/i18n/config";
@@ -17,6 +17,9 @@ import { hasLocale, locales } from "@/i18n/config";
 type CommitteePageProps = {
   params: Promise<{ lang: string; slug: string }>;
 };
+
+const sectionShell =
+  "mx-auto w-full max-w-[1729px] px-5 md:px-10 lg:px-20";
 
 export const dynamicParams = false;
 
@@ -60,16 +63,12 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
   const dictionary = getDictionary(lang);
   const labels = dictionary.committeePage;
 
-  const relatedCommittees = getCommittees(lang)
-    .filter(({ slug: committeeSlug }) => committeeSlug !== slug)
-    .slice(0, 3);
-
   return (
     <>
       <Header locale={lang} labels={dictionary.header} variant="solid" />
 
       <main className="overflow-hidden bg-[#f5f5f5] text-black">
-        <section className="mx-auto w-full max-w-[1729px] px-5 pb-10 pt-6 md:px-20 md:pb-16 md:pt-10">
+        <section className={`${sectionShell} pb-10 pt-6 md:pb-16 md:pt-10`}>
           <Link
             href={`/${lang}/#committees`}
             className="mb-6 inline-flex items-center gap-2 rounded-full px-1 py-2 text-sm font-semibold text-[#444] transition-colors hover:text-[#1285E5] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#1285E5]/20 md:mb-10 md:text-base"
@@ -91,21 +90,12 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
             <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,26,54,0.9)_0%,rgba(0,39,76,0.7)_48%,rgba(0,32,64,0.18)_100%)]" />
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/45 to-transparent" />
 
-            <div className="relative z-10 flex min-h-[560px] flex-col justify-between p-6 text-white md:min-h-[680px] md:p-12 lg:p-16">
-              <div className="flex items-start justify-between gap-4">
-                <span className="rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] backdrop-blur-md md:text-sm">
-                  {labels.badge}
-                </span>
-                <span className="text-3xl font-semibold tracking-tight text-white/65 md:text-5xl">
-                  {String(committee.id).padStart(2, "0")}
-                </span>
-              </div>
-
+            <div className="relative z-10 flex min-h-[560px] flex-col justify-end p-6 text-white md:min-h-[680px] md:p-12 lg:p-16">
               <div className="max-w-[1050px]">
-                <h1 className="max-w-[1000px] text-[clamp(40px,7vw,104px)] font-semibold leading-[0.93] tracking-[-0.045em]">
+                <h1 className="max-w-[1000px] text-balance text-[clamp(40px,7vw,104px)] font-semibold leading-[0.93] tracking-[-0.045em]">
                   {committee.title}
                 </h1>
-                <p className="mt-6 max-w-[760px] text-base font-medium leading-relaxed text-white/85 md:mt-8 md:text-xl lg:text-2xl">
+                <p className="mt-6 max-w-[760px] text-pretty text-base font-medium leading-relaxed text-white/85 md:mt-8 md:text-xl lg:text-2xl">
                   {committee.cardDescription}
                 </p>
               </div>
@@ -115,39 +105,34 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
 
         <section
           aria-labelledby="committee-about-title"
-          className="mx-auto grid w-full max-w-[1569px] gap-10 px-5 py-20 md:px-10 md:py-28 lg:grid-cols-12 lg:gap-16"
+          className={`${sectionShell} py-20 md:py-28`}
         >
-          <div className="lg:col-span-3">
-            <div className="lg:sticky lg:top-10">
-              <span className="inline-flex rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#666]">
-                {labels.about}
-              </span>
-            </div>
-          </div>
+          <span className="inline-flex rounded-full border border-black/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#666]">
+            {labels.about}
+          </span>
 
-          <div className="lg:col-span-9">
-            <h2
-              id="committee-about-title"
-              className="max-w-[1080px] text-[clamp(32px,4.6vw,72px)] font-semibold leading-[1.02] tracking-[-0.04em]"
-            >
-              {committee.statement}
-            </h2>
-            <div className="mt-10 grid gap-6 border-t border-black/10 pt-8 md:mt-14 md:grid-cols-2 md:gap-10 md:pt-10">
-              {committee.about.map((paragraph) => (
-                <p
-                  key={paragraph}
-                  className="text-base leading-relaxed text-[#555] md:text-lg lg:text-xl"
-                >
-                  {paragraph}
-                </p>
-              ))}
-            </div>
+          <h2
+            id="committee-about-title"
+            className="mt-7 max-w-[1320px] text-balance text-[clamp(34px,4.4vw,68px)] font-semibold leading-[1.02] tracking-[-0.04em] md:mt-9"
+          >
+            {committee.statement}
+          </h2>
+
+          <div className="mt-10 grid gap-7 border-t border-black/10 pt-8 md:mt-14 md:grid-cols-2 md:gap-x-14 md:pt-10 lg:mt-16 lg:gap-x-20">
+            {committee.about.map((paragraph) => (
+              <p
+                key={paragraph}
+                className="max-w-[660px] text-pretty text-base leading-relaxed text-[#555] md:text-lg lg:text-xl"
+              >
+                {paragraph}
+              </p>
+            ))}
           </div>
         </section>
 
         <section
           aria-labelledby="committee-directions-title"
-          className="mx-auto w-full max-w-[1729px] px-5 py-10 md:px-20 md:py-20"
+          className={`${sectionShell} py-10 md:py-20`}
         >
           <div className="mb-8 flex items-end justify-between gap-6 md:mb-12">
             <div>
@@ -156,7 +141,7 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
               </span>
               <h2
                 id="committee-directions-title"
-                className="mt-3 text-[clamp(32px,4vw,64px)] font-semibold leading-none tracking-[-0.04em]"
+                className="mt-3 text-balance text-[clamp(32px,4vw,64px)] font-semibold leading-none tracking-[-0.04em]"
               >
                 {labels.directions}
               </h2>
@@ -178,10 +163,10 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
                   </span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-semibold leading-tight tracking-[-0.025em] md:text-3xl">
+                  <h3 className="text-balance text-2xl font-semibold leading-tight tracking-[-0.025em] md:text-3xl">
                     {direction.title}
                   </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-[#666] md:text-base">
+                  <p className="mt-4 text-pretty text-sm leading-relaxed text-[#666] md:text-base">
                     {direction.description}
                   </p>
                 </div>
@@ -192,7 +177,7 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
 
         <section
           aria-labelledby="committee-gallery-title"
-          className="mx-auto w-full max-w-[1729px] px-5 py-20 md:px-20 md:py-28"
+          className={`${sectionShell} py-20 md:py-28`}
         >
           <div className="mb-8 md:mb-12">
             <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1285E5]">
@@ -200,7 +185,7 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
             </span>
             <h2
               id="committee-gallery-title"
-              className="mt-3 text-[clamp(32px,4vw,64px)] font-semibold leading-none tracking-[-0.04em]"
+              className="mt-3 text-balance text-[clamp(32px,4vw,64px)] font-semibold leading-none tracking-[-0.04em]"
             >
               {labels.moments}
             </h2>
@@ -232,55 +217,22 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
               </figure>
             ))}
           </div>
-        </section>
 
-        <section
-          aria-labelledby="related-committees-title"
-          className="mx-auto w-full max-w-[1569px] px-5 py-10 md:px-10 md:py-20"
-        >
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <span className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1285E5]">
-                {labels.continue}
-              </span>
-              <h2
-                id="related-committees-title"
-                className="mt-3 text-[clamp(30px,3.5vw,56px)] font-semibold leading-none tracking-[-0.04em]"
-              >
-                {labels.other}
-              </h2>
-            </div>
+          <div className="mt-10 md:mt-14">
             <Link
               href={`/${lang}/#committees`}
-              className="hidden items-center gap-2 text-sm font-semibold text-[#444] transition-colors hover:text-[#1285E5] sm:flex"
+              className="group inline-flex items-center gap-3 rounded-full border border-black/10 bg-white px-6 py-3.5 text-sm font-semibold text-[#444] shadow-[0_10px_30px_rgba(0,0,0,0.04)] transition-all hover:-translate-y-0.5 hover:border-[#1285E5]/30 hover:text-[#1285E5] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#1285E5]/20 md:px-7 md:py-4 md:text-base"
             >
-              {labels.viewAll}
-              <ArrowRightIcon className="h-5 w-5" aria-hidden="true" />
+              <ArrowLeftIcon
+                className="h-5 w-5 transition-transform group-hover:-translate-x-0.5"
+                aria-hidden="true"
+              />
+              {labels.all}
             </Link>
-          </div>
-
-          <div className="mt-8 divide-y divide-black/10 border-y border-black/10 md:mt-12">
-            {relatedCommittees.map((related, index) => (
-              <Link
-                key={related.slug}
-                href={`/${lang}/committees/${related.slug}`}
-                className="group grid grid-cols-[48px_1fr_44px] items-center gap-3 py-5 md:grid-cols-[80px_1fr_56px] md:py-7"
-              >
-                <span className="text-sm font-semibold text-[#999]">
-                  0{index + 1}
-                </span>
-                <span className="text-lg font-semibold leading-tight tracking-[-0.02em] transition-colors group-hover:text-[#1285E5] md:text-2xl">
-                  {related.title}
-                </span>
-                <span className="flex h-11 w-11 items-center justify-center justify-self-end rounded-full bg-white text-[#1285E5] transition-colors group-hover:bg-[#1285E5] group-hover:text-white md:h-14 md:w-14">
-                  <ArrowRightIcon className="h-5 w-5" aria-hidden="true" />
-                </span>
-              </Link>
-            ))}
           </div>
         </section>
 
-        <section className="mx-auto w-full max-w-[1729px] px-5 pb-10 pt-20 md:px-20 md:pb-20 md:pt-28">
+        <section className={`${sectionShell} pb-10 md:pb-20`}>
           <div className="relative overflow-hidden rounded-[32px] bg-[#1285E5] px-6 py-14 text-white md:rounded-[48px] md:px-14 md:py-20 lg:px-20 lg:py-24">
             <div className="absolute -right-16 -top-24 h-80 w-80 rounded-full border-[64px] border-white/10 md:h-[520px] md:w-[520px] md:border-[90px]" />
             <div className="absolute -bottom-32 right-1/3 h-64 w-64 rounded-full bg-white/5 blur-2xl" />
@@ -289,7 +241,7 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
               <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/70">
                 {labels.join}
               </span>
-              <h2 className="mt-4 text-[clamp(34px,5vw,76px)] font-semibold leading-[1.02] tracking-[-0.04em]">
+              <h2 className="mt-4 max-w-[1040px] text-balance text-[clamp(34px,5vw,76px)] font-semibold leading-[1.02] tracking-[-0.04em]">
                 {committee.cta}
               </h2>
               <div className="mt-9 flex flex-wrap gap-3 md:mt-12">
@@ -301,12 +253,6 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
                 >
                   {labels.contact}
                   <ArrowRightIcon className="h-5 w-5" aria-hidden="true" />
-                </Link>
-                <Link
-                  href={`/${lang}/#committees`}
-                  className="inline-flex items-center rounded-full border border-white/35 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/30 md:px-8 md:py-4 md:text-base"
-                >
-                  {labels.all}
                 </Link>
               </div>
             </div>
