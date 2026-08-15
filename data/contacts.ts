@@ -7,5 +7,5 @@ export const contactLinks = {
   telegram:
     process.env.NEXT_PUBLIC_AITUSA_TELEGRAM ?? "https://t.me/aitusanews",
   instagram:
-    process.env.NEXT_PUBLIC_AITUSA_INSTAGRAM ?? "https://www.instagram.com/",
+    process.env.NEXT_PUBLIC_AITUSA_INSTAGRAM ?? "https://www.instagram.com/astana_it_students?igsh=NGpxbGp6aG0yYjZs",
 } as const;

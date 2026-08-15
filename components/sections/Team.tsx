@@ -38,6 +38,7 @@ const sectionShell =
 
 export default function Team({ labels }: TeamProps) {
     const revealHeadingRef = useRef<HTMLHeadingElement>(null);
+    const membersGridRef = useRef<HTMLDivElement>(null);
     const revealWords = useMemo(
         () => labels.revealText.split(" ").map((word) => Array.from(word)),
         [labels.revealText]
@@ -106,22 +107,128 @@ export default function Team({ labels }: TeamProps) {
         };
     }, [labels.revealText]);
 
+    useEffect(() => {
+        const grid = membersGridRef.current;
+
+        if (!grid) return;
+
+        const members = Array.from(
+            grid.querySelectorAll<HTMLElement>("[data-team-member]")
+        );
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const desktopLayout = window.matchMedia("(min-width: 768px)");
+        let animationFrame: number | null = null;
+
+        const clamp = (value: number) => Math.min(Math.max(value, 0), 1);
+
+        const updateMembers = () => {
+            animationFrame = null;
+
+            members.forEach((member, index) => {
+                const photo = member.querySelector<HTMLElement>("[data-team-photo]");
+                const copy = member.querySelector<HTMLElement>("[data-team-copy]");
+
+                if (!photo || !copy) return;
+
+                if (reducedMotion.matches) {
+                    photo.style.opacity = "1";
+                    photo.style.transform = "none";
+                    photo.style.filter = "none";
+                    copy.style.opacity = "1";
+                    copy.style.transform = "none";
+                    return;
+                }
+
+                const rect = member.getBoundingClientRect();
+                const animationStart = window.innerHeight * 0.9;
+                const animationEnd = window.innerHeight * 0.25;
+                const scrollProgress = clamp(
+                    (animationStart - rect.top) / (animationStart - animationEnd)
+                );
+                const stagger = desktopLayout.matches ? index * 0.08 : 0;
+                const progress = clamp(
+                    (scrollProgress - stagger) / (1 - stagger)
+                );
+                const photoProgress = 1 - Math.pow(1 - progress, 3);
+                const copyStart = 0.48;
+                const copyProgressRaw = clamp(
+                    (progress - copyStart) / (1 - copyStart)
+                );
+                const copyProgress = 1 - Math.pow(1 - copyProgressRaw, 3);
+
+                photo.style.opacity = String(0.15 + photoProgress * 0.85);
+                photo.style.transform = `translate3d(0, ${48 * (1 - photoProgress)}px, 0) scale(${0.97 + photoProgress * 0.03})`;
+                photo.style.filter = `blur(${2 * (1 - photoProgress)}px)`;
+
+                copy.style.opacity = String(0.15 + copyProgress * 0.85);
+                copy.style.transform = `translate3d(0, ${28 * (1 - copyProgress)}px, 0)`;
+            });
+        };
+
+        const scheduleUpdate = () => {
+            if (animationFrame === null) {
+                animationFrame = window.requestAnimationFrame(updateMembers);
+            }
+        };
+
+        scheduleUpdate();
+        window.addEventListener("scroll", scheduleUpdate, { passive: true });
+        window.addEventListener("resize", scheduleUpdate);
+        reducedMotion.addEventListener("change", scheduleUpdate);
+        desktopLayout.addEventListener("change", scheduleUpdate);
+
+        return () => {
+            window.removeEventListener("scroll", scheduleUpdate);
+            window.removeEventListener("resize", scheduleUpdate);
+            reducedMotion.removeEventListener("change", scheduleUpdate);
+            desktopLayout.removeEventListener("change", scheduleUpdate);
+
+            if (animationFrame !== null) {
+                window.cancelAnimationFrame(animationFrame);
+            }
+        };
+    }, [labels.members.length]);
+
     return (
         <div className="bg-[#F5F5F5]">
 
 
             <section className={`${sectionShell} py-20 md:py-28`}>
-                <div className="mx-auto grid w-full max-w-[1569px] grid-cols-1 gap-12 md:grid-cols-3 md:gap-5">
+                <div
+                    ref={membersGridRef}
+                    className="mx-auto grid w-full max-w-[1569px] grid-cols-1 gap-12 md:grid-cols-3 md:gap-5"
+                >
                     {labels.members.map((member, i) => (
-                        <div key={i} className="flex flex-col w-full">
-                            <div className="aspect-[3/4] w-full overflow-hidden rounded-[28px] bg-gray-100 md:rounded-[40px]">
+                        <div
+                            key={i}
+                            data-team-member
+                            className="flex w-full flex-col"
+                        >
+                            <div
+                                data-team-photo
+                                className="aspect-[3/4] w-full transform-gpu overflow-hidden rounded-[28px] bg-gray-100 md:rounded-[40px]"
+                                style={{
+                                    opacity: 0.15,
+                                    transform: "translate3d(0, 48px, 0) scale(0.97)",
+                                    filter: "blur(2px)",
+                                    willChange: "opacity, transform, filter",
+                                }}
+                            >
                                 <img
                                     src={memberImages[i]}
                                     alt={member.name}
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <div className="flex w-full flex-col items-center pt-5 text-center">
+                            <div
+                                data-team-copy
+                                className="flex w-full transform-gpu flex-col items-center pt-5 text-center"
+                                style={{
+                                    opacity: 0.15,
+                                    transform: "translate3d(0, 28px, 0)",
+                                    willChange: "opacity, transform",
+                                }}
+                            >
                                 <h3
                                     style={fi}
                                     className="text-balance md:flex md:min-h-[102px] md:items-center md:justify-center"
