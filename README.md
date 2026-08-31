@@ -16,7 +16,7 @@ A modern Next.js web application for the AITU Student Association (AITUSA). This
 
 ## Project Overview
 
-AITUSA Frontend is a student-focused web application built with Next.js that provides information about student clubs, events, and galleries. The site is designed to be fast, responsive, and easy to navigate.
+AITUSA is a monorepo with a Next.js frontend and a NestJS backend. It provides information about student clubs, events, and galleries.
 
 **Key Features:**
 
@@ -30,7 +30,7 @@ AITUSA Frontend is a student-focused web application built with Next.js that pro
 
 Before you begin, ensure you have the following installed:
 
-- **Node.js** (v18 or higher)
+- **Node.js** (v22.12 or higher)
 - **npm** (v9 or higher) or **yarn**/pnpm/**bun**
 - A code editor (VS Code recommended)
 - Git (for version control)
@@ -76,38 +76,40 @@ Start the local development server:
 npm run dev
 ```
 
-The application will be available at [http://localhost:3000](http://localhost:3000)
+The frontend will be available at [http://localhost:3000](http://localhost:3000), and the backend API at [http://localhost:3001/api](http://localhost:3001/api).
 
 The server automatically reloads when you save changes to your files (hot reload).
 
 ### 4. Start Editing
 
-- Edit pages by modifying files in the `app/` directory
-- Edit components in the `components/` directory
+- Edit pages by modifying files in the `apps/web/app/` directory
+- Edit components in the `apps/web/components/` directory
 - Changes are reflected immediately in your browser
 
 ## Project Structure
 
 ```
 aitusa-front/
-├── app/                          # Next.js App Router (main application logic)
-│   ├── layout.tsx               # Root layout component
-│   ├── page.tsx                 # Home page (/)
-│   ├── globals.css              # Global styles
-│   ├── clubs/
-│   │   ├── page.tsx            # Clubs listing page (/clubs)
-│   │   └── [club-name]/
-│   │       └── page.tsx        # Dynamic club detail page (/clubs/[club-name])
-│   └── gallery/
-│       └── page.tsx            # Gallery page (/gallery)
-├── components/                   # Reusable React components
-│   └── Button.tsx              # Button component
-├── public/                       # Static assets (images, etc.)
-├── package.json                 # Project dependencies and scripts
-├── tsconfig.json               # TypeScript configuration
-├── next.config.ts              # Next.js configuration
-├── postcss.config.mjs           # PostCSS configuration (for Tailwind)
-├── eslint.config.mjs            # ESLint configuration
+├── apps/
+│   ├── api/                      # NestJS backend workspace
+│   │   ├── src/
+│   │   │   ├── clubs/           # Clubs API module and data
+│   │   │   ├── app.module.ts    # Root NestJS module
+│   │   │   └── main.ts          # Backend entry point
+│   │   ├── nest-cli.json
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   └── web/                      # Next.js frontend workspace
+│       ├── app/                  # Next.js App Router
+│       ├── components/           # Reusable React components
+│       ├── public/               # Static assets
+│       ├── package.json          # Frontend dependencies and scripts
+│       ├── tsconfig.json         # TypeScript configuration
+│       ├── next.config.ts        # Next.js configuration
+│       ├── postcss.config.mjs    # PostCSS configuration
+│       └── eslint.config.mjs     # ESLint configuration
+├── package.json                  # npm workspaces and root scripts
+├── package-lock.json             # Shared dependency lockfile
 └── README.md                    # This file
 ```
 
@@ -117,17 +119,27 @@ Your application has the following routes:
 
 | Route                | Description                                  |
 | -------------------- | -------------------------------------------- |
-| `/`                  | Home page - Main landing page                |
-| `/clubs`             | Clubs listing - Browse all student clubs     |
-| `/clubs/[club-name]` | Club detail - View specific club information |
-| `/gallery`           | Gallery - View event photos and media        |
+| `/[lang]`                  | Localized home page                          |
+| `/[lang]/clubs`             | Clubs listing - Browse all student clubs     |
+| `/[lang]/clubs/[club-name]` | Club detail - View specific club information |
+| `/[lang]/gallery`           | Gallery - View event photos and media        |
+
+Backend API routes:
+
+| Route                           | Description                    |
+| ------------------------------- | ------------------------------ |
+| `/api/health`                   | Backend health check           |
+| `/api/clubs-mock-data?lang=ru`  | Localized clubs list           |
+| `/api/club-mock-data?slug=...`  | Club details by slug           |
+
+The frontend uses the same `/api/...` paths. Next.js rewrites those requests to the NestJS backend configured by `API_URL` (defaults to `http://localhost:3001`).
 
 **Example URLs:**
 
-- Home: http://localhost:3000/
-- Clubs: http://localhost:3000/clubs
-- Specific Club: http://localhost:3000/clubs/tech-club
-- Gallery: http://localhost:3000/gallery
+- Home: http://localhost:3000/en
+- Clubs: http://localhost:3000/en/clubs
+- Specific Club: http://localhost:3000/en/clubs/chess-club
+- Gallery: http://localhost:3000/en/gallery
 
 ## Development Workflow
 
@@ -135,11 +147,11 @@ Your application has the following routes:
 
 #### Edit a Page
 
-1. Navigate to the file in `app/`
+1. Navigate to the file in `apps/web/app/`
 2. Make your changes using JSX/TSX
 3. The page automatically reloads in your browser
 
-**Example:** To edit the home page, open `app/page.tsx`:
+**Example:** To edit the localized home page, open `apps/web/app/[lang]/page.tsx`:
 
 ```typescript
 export default function Home() {
@@ -149,7 +161,7 @@ export default function Home() {
 
 #### Create a New Component
 
-1. Create a new file in `components/` (e.g., `components/my-component.tsx`)
+1. Create a new file in `apps/web/components/` (e.g., `apps/web/components/my-component.tsx`)
 2. Write your component:
 
 ```typescript
@@ -178,7 +190,7 @@ This project uses **Tailwind CSS** for styling. Add classes directly to JSX elem
 </div>
 ```
 
-For global styles, edit `app/globals.css`.
+For global styles, edit `apps/web/app/globals.css`.
 
 ## Building for Production
 
@@ -188,7 +200,7 @@ For global styles, edit `app/globals.css`.
 npm run build
 ```
 
-This creates an optimized production build in the `.next/` directory.
+This builds the NestJS backend into `apps/api/dist/` and the frontend into `apps/web/.next/`.
 
 ### Start the Production Server
 
@@ -196,20 +208,24 @@ This creates an optimized production build in the `.next/` directory.
 npm start
 ```
 
-The application will run on [http://localhost:3000](http://localhost:3000)
+The frontend runs on [http://localhost:3000](http://localhost:3000), and the backend runs on [http://localhost:3001/api](http://localhost:3001/api).
 
 ### Available Scripts
 
 | Command         | Purpose                                  |
 | --------------- | ---------------------------------------- |
-| `npm run dev`   | Start development server with hot reload |
-| `npm run build` | Create optimized production build        |
-| `npm start`     | Run the production build                 |
-| `npm run lint`  | Run ESLint to check code quality         |
+| `npm run dev`       | Start frontend and backend in watch mode |
+| `npm run dev:web`   | Start only the Next.js frontend          |
+| `npm run dev:api`   | Start only the NestJS backend            |
+| `npm run build`     | Build all workspaces                      |
+| `npm start`         | Run both production builds               |
+| `npm run lint`      | Run ESLint in all workspaces              |
+| `npm run typecheck` | Check TypeScript in all workspaces        |
 
 ## Tech Stack
 
-- **Framework:** [Next.js 16.2.4](https://nextjs.org) - React framework with App Router
+- **Frontend:** [Next.js 16.2.4](https://nextjs.org) with React 19
+- **Backend:** [NestJS 12](https://nestjs.com)
 - **Language:** [TypeScript](https://www.typescriptlang.org) - Type-safe JavaScript
 - **Runtime:** [React 19.2.4](https://react.dev) - UI library
 - **Styling:** [Tailwind CSS 4](https://tailwindcss.com) - Utility-first CSS framework
@@ -220,11 +236,13 @@ The application will run on [http://localhost:3000](http://localhost:3000)
 
 ### Port 3000 Already in Use
 
-If port 3000 is occupied, you can run the dev server on a different port:
+If port 3000 is occupied, run only the frontend on a different port:
 
 ```bash
-npm run dev -- -p 3001
+npm run dev:web -- --port 3002
 ```
+
+For a different backend port, set both `API_PORT` for NestJS and `API_URL` for Next.js.
 
 ### Dependencies Installation Issues
 

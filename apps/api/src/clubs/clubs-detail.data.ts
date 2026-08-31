@@ -1,7 +1,6 @@
-import { NextResponse } from "next/server";
-import type { ClubBySlug } from "@/types/club";
-import { getClubCopy, getClubGoals } from "@/data/club-translations";
-import { defaultLocale, hasLocale } from "@/i18n/config";
+import type { ClubBySlug } from "./clubs.types";
+import { getClubCopy, getClubGoals } from "./club-translations";
+import { defaultLocale, hasLocale } from "./locale";
 
 function createClubGoals(clubName: string): ClubBySlug["goals"] {
   const placeholderImages = [
@@ -45,9 +44,10 @@ function createClubMemories(): ClubBySlug["memories"] {
   return Array.from({ length: 8 }, (_, index) => placeholderImages[index % 2]);
 }
 
-// usage:
-// - fetch("/api/club-mock-data?slug=chess-club") -> single club by slug
-export async function GET(request: Request) {
+export function getClubDetails(
+  lang: string = defaultLocale,
+  slug?: string,
+): ClubBySlug | ClubBySlug[] | undefined {
   const clubs: ClubBySlug[] = [
     {
       id: 1,
@@ -186,8 +186,6 @@ export async function GET(request: Request) {
     },
   ];
 
-  const { searchParams } = new URL(request.url);
-  const lang = searchParams.get("lang") ?? defaultLocale;
   const locale = hasLocale(lang) ? lang : defaultLocale;
   const localizedClubs = clubs.map((club) => {
     const copy = getClubCopy(club.slug, locale, {
@@ -201,22 +199,13 @@ export async function GET(request: Request) {
       goals: getClubGoals(copy.name, locale),
     };
   });
-  const slug = searchParams.get("slug") ?? searchParams.get("nameUrl");
-
   if (!slug) {
-    return NextResponse.json(localizedClubs);
+    return localizedClubs;
   }
 
   const club = localizedClubs.find(
     (item) => item.slug.toLowerCase() === slug.toLowerCase(),
   );
 
-  if (!club) {
-    return NextResponse.json(
-      { message: `Club with slug "${slug}" not found` },
-      { status: 404 },
-    );
-  }
-
-  return NextResponse.json(club);
+  return club;
 }
