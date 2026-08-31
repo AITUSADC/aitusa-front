@@ -1,5 +1,5 @@
-import type { ClubGoal } from "@/types/club";
-import type { Locale } from "@/i18n/config";
+import type { ClubGoal } from "./clubs.types";
+import type { Locale } from "./locale";
 
 type ClubCopy = { name: string; description: string };
 

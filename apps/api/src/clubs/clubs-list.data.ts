@@ -1,10 +1,8 @@
-import { NextResponse } from "next/server";
-import type { ClubListItem } from "@/types/club";
-import { getClubCopy } from "@/data/club-translations";
-import { defaultLocale, hasLocale } from "@/i18n/config";
+import type { ClubListItem } from "./clubs.types";
+import { getClubCopy } from "./club-translations";
+import { defaultLocale, hasLocale } from "./locale";
 
-// usage: fetch("/api/clubs-mock-data");
-export async function GET(request: Request) {
+export function getClubList(lang: string = defaultLocale): ClubListItem[] {
   const clubs: ClubListItem[] = [
     {
       id: 1,
@@ -124,7 +122,6 @@ export async function GET(request: Request) {
     },
   ];
 
-  const lang = new URL(request.url).searchParams.get("lang") ?? defaultLocale;
   const locale = hasLocale(lang) ? lang : defaultLocale;
   const localizedClubs = clubs.map((club) => ({
     ...club,
@@ -134,5 +131,5 @@ export async function GET(request: Request) {
     }),
   }));
 
-  return NextResponse.json(localizedClubs);
+  return localizedClubs;
 }
