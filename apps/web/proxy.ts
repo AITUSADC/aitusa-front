@@ -5,6 +5,12 @@ import { defaultLocale, locales } from "@/i18n/config";
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  if (pathname === "/admin" || pathname.startsWith("/admin/")) {
+    request.nextUrl.pathname = `/ru${pathname}`;
+    return NextResponse.redirect(request.nextUrl);
+  }
+
   const hasLocale = locales.some(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
   );

@@ -24,6 +24,7 @@ export default function Header({
     const navLinks = [
       { label: labels.home, href: `/${locale}` },
       { label: labels.clubs, href: `/${locale}/clubs` },
+      { label: labels.events, href: `/${locale}/events` },
       { label: labels.gallery, href: `/${locale}/gallery` },
       { label: labels.contacts, href: `/${locale}/#footer` },
     ];

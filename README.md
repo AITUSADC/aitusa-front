@@ -70,6 +70,21 @@ bun install
 
 ### 3. Run the Development Server
 
+Start PostgreSQL and apply the committed database migrations:
+
+```bash
+docker compose up -d db
+npm run db:deploy --workspace=@aitusa/api
+npm run db:seed --workspace=@aitusa/api
+```
+
+`db:deploy` applies versioned migrations and is the command teammates and
+deployments should use after pulling schema changes. `db:seed` is optional and
+adds development events for all three temporal states. The local API defaults
+to the credentials from `docker-compose.yml`; create `apps/api/.env` from
+`.env.example` and set `ADMIN_API_KEY` to enable event creation through the
+admin panel.
+
 Start the local development server:
 
 ```bash
@@ -123,6 +138,8 @@ Your application has the following routes:
 | `/[lang]/clubs`             | Clubs listing - Browse all student clubs     |
 | `/[lang]/clubs/[club-name]` | Club detail - View specific club information |
 | `/[lang]/gallery`           | Gallery - View event photos and media        |
+| `/[lang]/events`            | Current, upcoming, and past events            |
+| `/ru/admin/events`          | Local event creation panel (API-key protected writes) |
 
 Backend API routes:
 
@@ -131,6 +148,8 @@ Backend API routes:
 | `/api/health`                   | Backend health check           |
 | `/api/clubs-mock-data?lang=ru`  | Localized clubs list           |
 | `/api/club-mock-data?slug=...`  | Club details by slug           |
+| `/api/events?lang=ru`            | Published localized events     |
+| `POST /api/admin/events`          | Create an event with an admin API key |
 
 The frontend uses the same `/api/...` paths. Next.js rewrites those requests to the NestJS backend configured by `API_URL` (defaults to `http://localhost:3001`).
 
@@ -218,6 +237,8 @@ The frontend runs on [http://localhost:3000](http://localhost:3000), and the bac
 | `npm run dev:web`   | Start only the Next.js frontend          |
 | `npm run dev:api`   | Start only the NestJS backend            |
 | `npm run build`     | Build all workspaces                      |
+| `npm run db:deploy --workspace=@aitusa/api` | Apply committed database migrations |
+| `npm run db:seed --workspace=@aitusa/api` | Add optional development event data |
 | `npm start`         | Run both production builds               |
 | `npm run lint`      | Run ESLint in all workspaces              |
 | `npm run typecheck` | Check TypeScript in all workspaces        |
