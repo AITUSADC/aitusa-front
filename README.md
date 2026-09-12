@@ -1,6 +1,6 @@
 # AITUSA Frontend
 
-A modern Next.js web application for the AITU Student Association (AITUSA). This project showcases student clubs, events, and gallery content.
+A modern Next.js web application for the AITU Student Association (AITUSA). This project showcases student clubs, committees, and events.
 
 ## Table of Contents
 
@@ -17,12 +17,12 @@ A modern Next.js web application for the AITU Student Association (AITUSA). This
 
 ## Project Overview
 
-AITUSA is a monorepo with a Next.js frontend and a NestJS backend. It provides information about student clubs, events, and galleries.
+AITUSA is a monorepo with a Next.js frontend and a NestJS backend. It provides information about student clubs, committees, and events.
 
 **Key Features:**
 
 - Student clubs directory
-- Event gallery showcase
+- Club and committee photo memories
 - Dynamic club pages with detailed information
 - Modern UI with Tailwind CSS
 - Type-safe development with TypeScript
@@ -168,7 +168,6 @@ Your application has the following routes:
 | `/[lang]`                  | Localized home page                          |
 | `/[lang]/clubs`             | Clubs listing - Browse all student clubs     |
 | `/[lang]/clubs/[club-name]` | Club detail - View specific club information |
-| `/[lang]/gallery`           | Gallery - View event photos and media        |
 | `/[lang]/events`            | Current, upcoming, and past events            |
 | `/ru/admin/events`          | Local event creation panel (API-key protected writes) |
 
@@ -189,7 +188,6 @@ The frontend uses the same `/api/...` paths. Next.js rewrites those requests to 
 - Home: http://localhost:3000/en
 - Clubs: http://localhost:3000/en/clubs
 - Specific Club: http://localhost:3000/en/clubs/chess-club
-- Gallery: http://localhost:3000/en/gallery
 
 ## Development Workflow
 

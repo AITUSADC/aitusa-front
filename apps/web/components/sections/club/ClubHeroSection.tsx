@@ -1,45 +1,37 @@
-import Button from "@/components/ui/Button";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import type { Dictionary } from "@/i18n/dictionaries";
-import React from "react";
+import type { Locale } from "@/i18n/config";
 
-interface ClubHeroSectionProps {
+type ClubHeroSectionProps = {
   name: string;
   description: string;
   imageUrl: string;
-  status?: "open" | null;
+  locale: Locale;
   labels: Dictionary["clubs"];
-}
+};
 
-export default function ClubHeroSection({
-  name,
-  description,
-  imageUrl,
-  status,
-  labels,
-}: ClubHeroSectionProps) {
+export default function ClubHeroSection({ name, description, imageUrl, locale, labels }: ClubHeroSectionProps) {
   return (
-    <section className="mx-4 mt-6 mb-16 rounded-[28px] bg-white p-5 sm:mx-8 sm:p-8 md:mt-8 md:mb-20 md:rounded-[36px] md:p-12 lg:mx-20 lg:mb-24 lg:mt-10 lg:flex lg:items-center lg:gap-16 lg:rounded-[40px] lg:p-16 xl:gap-20">
-      <div className="lg:flex-1">
-        {status == "open" && (
-          <span className="bg-[#f5f5f5] px-2 py-1 text-sm font-semibold rounded-full ">
-            {labels.openCall}
-          </span>
-        )}
-        <h2 className="mt-4 mb-3 text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:mt-5 sm:text-4xl md:mb-4 md:text-5xl lg:mt-6">
-          {name}
-        </h2>
-        <p className="mb-8 text-base text-[#444] sm:text-lg md:mb-10 md:text-xl lg:mb-11">
-          {description}
-        </p>
-
-        {status == "open" && <Button>{labels.joinNow}</Button>}
+    <section className="mx-auto w-full max-w-[1440px] px-5 pb-12 pt-6 md:px-10 md:pb-20 md:pt-10 lg:px-16">
+      <Link href={`/${locale}/clubs`} className="inline-flex items-center gap-2 py-2 text-sm font-medium text-[#666] transition-colors hover:text-[#1285E5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1285E5]">
+        <ArrowLeftIcon className="h-4 w-4" aria-hidden="true" />
+        {labels.all}
+      </Link>
+      <div className="mb-8 mt-8 max-w-5xl md:mb-10 md:mt-12">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1285E5]">AITUSA · {labels.title}</p>
+        <h1 className="mt-4 text-balance text-[clamp(36px,5.5vw,76px)] font-semibold leading-[1.04] tracking-[-0.045em]">{name}</h1>
+        <p className="mt-5 max-w-3xl text-pretty text-base leading-relaxed text-[#666] md:text-lg">{description}</p>
       </div>
-      <div className="mt-8 lg:mt-0 lg:flex-1">
-        <img
+      <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[#e9e9e9] md:aspect-[16/8] md:rounded-[32px]">
+        <Image
           src={imageUrl}
           alt={name}
-          className="block w-full rounded-3xl object-cover sm:rounded-4xl lg:ml-auto lg:rounded-[40px]"
-          style={{ maxWidth: 730, aspectRatio: "730 / 587" }}
+          fill
+          preload
+          sizes="(min-width: 1440px) 1312px, (min-width: 1024px) calc(100vw - 128px), (min-width: 768px) calc(100vw - 80px), calc(100vw - 40px)"
+          className="object-cover"
         />
       </div>
     </section>

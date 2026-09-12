@@ -7,7 +7,6 @@ export type Dictionary = {
     committees: string;
     clubs: string;
     events: string;
-    gallery: string;
     contacts: string;
     contact: string;
     openMenu: string;
@@ -50,6 +49,8 @@ export type Dictionary = {
     contact: string;
   };
   clubs: {
+    all: string;
+    about: string;
     title: string;
     searchPlaceholder: string;
     search: string;
@@ -68,7 +69,6 @@ export type Dictionary = {
     loading: string;
     error: string;
   };
-  gallery: { title: string; description: string };
   events: {
     eyebrow: string;
     title: string;
@@ -100,7 +100,6 @@ const en: Dictionary = {
     committees: "Committees",
     clubs: "Clubs",
     events: "Events",
-    gallery: "Gallery",
     contacts: "Contacts",
     contact: "Contact us",
     openMenu: "Open menu",
@@ -148,6 +147,8 @@ const en: Dictionary = {
   },
   clubs: {
     title: "Clubs",
+    all: "Back to clubs",
+    about: "About the club",
     searchPlaceholder: "Club name or keywords...",
     search: "Search",
     options: { all: "All", sports: "Sports", strategy: "Strategy", literature: "Literature" },
@@ -164,10 +165,6 @@ const en: Dictionary = {
     membershipButton: "Apply",
     loading: "Loading club...",
     error: "We could not load this club.",
-  },
-  gallery: {
-    title: "Gallery",
-    description: "Photos and moments from AITUSA student life.",
   },
   events: {
     eyebrow: "AITUSA calendar",
@@ -200,7 +197,6 @@ const ru: Dictionary = {
     committees: "Комитеты",
     clubs: "Клубы",
     events: "События",
-    gallery: "Галерея",
     contacts: "Контакты",
     contact: "Связаться",
     openMenu: "Открыть меню",
@@ -248,6 +244,8 @@ const ru: Dictionary = {
   },
   clubs: {
     title: "Клубы",
+    all: "Вернуться к клубам",
+    about: "О клубе",
     searchPlaceholder: "Название клуба или ключевые слова...",
     search: "Найти",
     options: { all: "Все", sports: "Спорт", strategy: "Стратегия", literature: "Литература" },
@@ -264,10 +262,6 @@ const ru: Dictionary = {
     membershipButton: "Подать заявку",
     loading: "Загружаем клуб...",
     error: "Не удалось загрузить информацию о клубе.",
-  },
-  gallery: {
-    title: "Галерея",
-    description: "Фотографии и моменты студенческой жизни AITUSA.",
   },
   events: {
     eyebrow: "Календарь AITUSA",
@@ -300,7 +294,6 @@ const kk: Dictionary = {
     committees: "Комитеттер",
     clubs: "Клубтар",
     events: "Іс-шаралар",
-    gallery: "Галерея",
     contacts: "Байланыс",
     contact: "Хабарласу",
     openMenu: "Мәзірді ашу",
@@ -348,6 +341,8 @@ const kk: Dictionary = {
   },
   clubs: {
     title: "Клубтар",
+    all: "Клубтарға оралу",
+    about: "Клуб туралы",
     searchPlaceholder: "Клуб атауы немесе кілт сөздер...",
     search: "Іздеу",
     options: { all: "Барлығы", sports: "Спорт", strategy: "Стратегия", literature: "Әдебиет" },
@@ -364,10 +359,6 @@ const kk: Dictionary = {
     membershipButton: "Өтінім беру",
     loading: "Клуб жүктелуде...",
     error: "Клуб туралы ақпаратты жүктеу мүмкін болмады.",
-  },
-  gallery: {
-    title: "Галерея",
-    description: "AITUSA студенттік өмірінің суреттері мен жарқын сәттері.",
   },
   events: {
     eyebrow: "AITUSA күнтізбесі",

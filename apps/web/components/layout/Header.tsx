@@ -26,7 +26,6 @@ export default function Header({
       { label: labels.committees, href: `/${locale}/#committees` },
       { label: labels.clubs, href: `/${locale}/clubs` },
       { label: labels.events, href: `/${locale}/events` },
-      { label: labels.gallery, href: `/${locale}/gallery` },
       { label: labels.contacts, href: `/${locale}/#footer` },
     ];
 

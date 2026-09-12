@@ -1,43 +1,34 @@
-import Button from "@/components/ui/Button";
 import Image from "next/image";
-import React from "react";
 import type { Dictionary } from "@/i18n/dictionaries";
 
-interface ClubMemoriesSectionProps {
+type ClubMemoriesSectionProps = {
   memories: string[];
   labels: Dictionary["clubs"];
-}
+};
 
-export default function ClubMemoriesSection({
-  memories,
-  labels,
-}: ClubMemoriesSectionProps) {
+export default function ClubMemoriesSection({ memories, labels }: ClubMemoriesSectionProps) {
+  if (memories.length === 0) return null;
+
   return (
-    <section className="mx-4 mb-14 mt-8 sm:mx-8 sm:mb-16 md:mt-10 md:mb-20 lg:mx-20 lg:mb-24">
-      <h2 className="text-center text-2xl font-semibold leading-tight text-neutral-900 sm:text-3xl md:text-4xl lg:text-5xl">
-        {labels.memories}
-      </h2>
-      <div className="mt-6 grid grid-cols-2 gap-2 sm:mt-8 sm:gap-4 md:grid-cols-3 md:gap-5 lg:mt-10 lg:grid-cols-4">
+    <section aria-labelledby="club-memories-title" className="mx-auto w-full max-w-[1440px] px-5 pb-16 md:px-10 md:pb-24 lg:px-16">
+      <h2 id="club-memories-title" className="mb-7 text-[clamp(32px,4vw,52px)] font-semibold leading-tight tracking-[-0.04em] md:mb-10">{labels.memories}</h2>
+      <div className="grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
         {memories.map((imageUrl, index) => (
-          <div
-            key={`${imageUrl}-${index}`}
-            className="overflow-hidden rounded-xl bg-white shadow-md sm:rounded-2xl lg:rounded-3xl"
-          >
-            <Image
-              src={imageUrl}
-              alt={`${labels.memoryAlt} ${index + 1}`}
-              width={300}
-              height={300}
-              sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
-              className="h-full w-full object-cover aspect-square"
-            />
-          </div>
+          <figure key={`${imageUrl}-${index}`}>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-[#e9e9e9] md:rounded-3xl">
+              <Image
+                src={imageUrl}
+                alt={`${labels.memoryAlt} ${index + 1}`}
+                fill
+                sizes="(min-width: 1440px) 424px, (min-width: 1024px) 30vw, (min-width: 640px) 45vw, calc(100vw - 40px)"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="mt-4 text-sm leading-relaxed text-[#666]">
+              {labels.memoryAlt} {String(index + 1).padStart(2, "0")}
+            </figcaption>
+          </figure>
         ))}
-      </div>
-      <div className="flex w-full justify-center pt-8 sm:pt-10">
-        <div className="w-full sm:w-auto">
-          <Button>{labels.archive}</Button>
-        </div>
       </div>
     </section>
   );

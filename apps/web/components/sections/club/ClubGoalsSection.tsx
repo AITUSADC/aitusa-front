@@ -1,84 +1,28 @@
 import type { ClubGoal } from "@/types/club";
-import Image from "next/image";
-import React from "react";
-import type { Dictionary } from "@/i18n/dictionaries";
 
-interface ClubGoalsSectionProps {
+type ClubGoalsSectionProps = {
   description: string;
   list: ClubGoal[];
-  title: Dictionary["clubs"]["goals"];
-}
+  title: string;
+};
 
-export default function ClubGoalsSection({
-  description,
-  list,
-  title,
-}: ClubGoalsSectionProps) {
+export default function ClubGoalsSection({ description, list, title }: ClubGoalsSectionProps) {
   return (
-    <section className="mx-4 mb-16 mt-8 sm:mx-8 md:mt-10 md:mb-20 lg:mx-20 lg:mb-24">
-      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12">
+    <section aria-labelledby="club-about-title" className="mx-auto w-full max-w-[1440px] px-5 pb-14 md:px-10 md:pb-24 lg:px-16">
+      <div className="grid gap-7 border-b border-black/10 pb-12 md:grid-cols-[0.9fr_1.1fr] md:gap-16 md:pb-20">
         <div>
-          <h2 className="text-3xl font-semibold leading-tight text-neutral-900 sm:text-4xl md:text-5xl">
-            {title}
-          </h2>
-          <p className="mt-5 text-base leading-relaxed text-[#444] sm:text-xl">
-            {description}
-          </p>
+          <h2 id="club-about-title" className="text-[clamp(28px,3vw,42px)] font-semibold leading-tight tracking-[-0.035em]">{title}</h2>
+          <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-[#666] md:text-lg">{description}</p>
         </div>
-
-        <div className="relative">
-          <span
-            className="absolute left-0 top-5 hidden h-full w-px bg-[#1d90f5] lg:block"
-            aria-hidden
-          />
-
-          <div className="space-y-12 lg:space-y-20">
-            {list.map((goal) => (
-              <div
-                key={goal.id}
-                className="grid lg:grid-cols-[24px_minmax(0,1fr)] lg:gap-8"
-              >
-                <div className="relative hidden lg:block" aria-hidden>
-                  <span className="absolute left-0 top-5 h-3 w-3 -translate-x-1/2 rounded-full bg-[#1d90f5]" />
-                </div>
-                <ClubGoalItem
-                  title={goal.title}
-                  description={goal.description}
-                  imageUrl={goal.imageUrl}
-                  id={goal.id}
-                />
-              </div>
-            ))}
-          </div>
+        <div className="space-y-6">
+          {list.map((goal) => (
+            <article key={goal.id}>
+              <h3 className="text-lg font-semibold tracking-tight md:text-xl">{goal.title}</h3>
+              <p className="mt-2 text-pretty text-base leading-relaxed text-[#666] md:text-lg">{goal.description}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function ClubGoalItem({ title, description, imageUrl }: ClubGoal) {
-  const imageSrc = imageUrl ?? null;
-
-  return (
-    <article>
-      <h3 className="text-2xl font-semibold leading-tight text-neutral-900 md:text-4xl">
-        {title}
-      </h3>
-      <p className="mt-3 text-base leading-relaxed text-[#444] sm:text-xl">
-        {description}
-      </p>
-
-      {imageSrc ? (
-        <div className="mt-8 overflow-hidden rounded-2xl sm:rounded-3xl">
-          <Image
-            src={imageSrc}
-            alt={title}
-            width={952}
-            height={318}
-            className="h-auto w-full object-cover aspect-10/4"
-          />
-        </div>
-      ) : null}
-    </article>
   );
 }

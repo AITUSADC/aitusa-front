@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import ClubGoalsSection from "@/components/sections/club/ClubGoalsSection";
 import ClubHeroSection from "@/components/sections/club/ClubHeroSection";
 import ClubMemoriesSection from "@/components/sections/club/ClubMemoriesSection";
-import JoinClubSection from "@/components/sections/club/JoinClubSection";
 import type { ClubBySlug } from "@/types/club";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -55,21 +54,20 @@ export default function ClubPageClient({
   }
 
   return (
-    <>
+    <main className="bg-[#f5f5f5] text-[#171717]">
       <ClubHeroSection
         name={clubData.name}
         description={clubData.description}
         imageUrl={clubData.imageUrl || "/images/placeholder2.jpg"}
-        status="open"
+        locale={locale}
         labels={labels}
       />
       <ClubGoalsSection
         description={clubData.goals.description}
         list={clubData.goals.list}
-        title={labels.goals}
+        title={labels.about}
       />
       <ClubMemoriesSection memories={clubData.memories} labels={labels} />
-      <JoinClubSection labels={labels} />
-    </>
+    </main>
   );
 }
