@@ -39,7 +39,7 @@ export default function Header({
                 ${
                   isTransparent && !isOpen
                     ? "absolute top-0 left-0 right-0 bg-transparent"
-                    : "relative bg-[#1285E5] xl:bg-[#f5f5f5] border-b border-gray-100"
+                    : "relative bg-[#0A66C2] xl:bg-[#f5f5f5] border-b border-gray-100"
                 }
             `}
       >
@@ -74,7 +74,7 @@ export default function Header({
                                 ${
                                   isTransparent
                                     ? "text-white hover:text-white/80"
-                                    : "text-gray-700 hover:text-[#1285E5]"
+                                    : "text-gray-700 hover:text-[#0A66C2]"
                                 }
                             `}
               >
@@ -124,13 +124,13 @@ export default function Header({
           className={`pointer-events-none absolute inset-x-0 bottom-0 h-px ${
             isTransparent || isOpen
               ? "bg-white/25"
-              : "bg-white/25 xl:bg-[#1285E5]/20"
+              : "bg-white/25 xl:bg-[#0A66C2]/20"
           }`}
         />
 
         <div
           className={`
-                    fixed inset-0 bg-[#1285E5] z-[105] flex flex-col items-center justify-center gap-8 transition-transform duration-500 xl:hidden
+                    fixed inset-0 bg-[#0A66C2] z-[105] flex flex-col items-center justify-center gap-8 transition-transform duration-500 xl:hidden
                     ${isOpen ? "translate-y-0" : "-translate-y-full"}
                 `}
         >

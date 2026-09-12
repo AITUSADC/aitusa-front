@@ -23,11 +23,11 @@
 }
 
 .card:focus-visible {
-  outline: 3px solid #1285e5;
+  outline: 3px solid #0a66c2;
   outline-offset: 4px;
 }
 
-.card:active { border-color: #1285e5; }
+.card:active { border-color: #0a66c2; }
 
 .artwork {
   position: absolute;
@@ -62,7 +62,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  color: #1285e5;
+  color: #0a66c2;
   font-size: 12px;
   font-weight: 600;
 }
@@ -105,7 +105,7 @@
     justify-content: space-between;
     gap: 16px;
     padding: 24px;
-    background: #1285e5;
+    background: #0a66c2;
     color: #fff;
     font-size: 15px;
     line-height: 1.5;
@@ -121,7 +121,7 @@
     border-radius: 999px;
     padding: 10px 16px;
     background: #fff;
-    color: #1285e5;
+    color: #0a66c2;
     font-size: 14px;
     font-weight: 600;
   }

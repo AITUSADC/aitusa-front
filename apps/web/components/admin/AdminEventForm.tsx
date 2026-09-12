@@ -160,7 +160,7 @@ export default function AdminEventForm() {
           </div>
         </div>
 
-        <div className="rounded-[28px] bg-[#1285E5] p-6 text-white shadow-sm">
+        <div className="rounded-[28px] bg-[#0A66C2] p-6 text-white shadow-sm">
           <Field label="Ключ администратора" htmlFor="adminApiKey" dark hint="Ключ отправляется только в защищённый API-запрос.">
             <input
               id="adminApiKey"
@@ -176,7 +176,7 @@ export default function AdminEventForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="mt-6 w-full rounded-full bg-white px-6 py-3.5 font-semibold text-[#1285E5] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
+            className="mt-6 w-full rounded-full bg-white px-6 py-3.5 font-semibold text-[#0A66C2] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting ? "Сохраняем…" : "Сохранить мероприятие"}
           </button>
@@ -198,7 +198,7 @@ export default function AdminEventForm() {
 }
 
 const inputClass =
-  "mt-2 w-full rounded-2xl border border-black/10 bg-[#fafafa] px-4 py-3 text-base outline-none transition focus:border-[#1285E5] focus:ring-4 focus:ring-[#1285E5]/10";
+  "mt-2 w-full rounded-2xl border border-black/10 bg-[#fafafa] px-4 py-3 text-base outline-none transition focus:border-[#0A66C2] focus:ring-4 focus:ring-[#0A66C2]/10";
 
 function FormSection({
   title,

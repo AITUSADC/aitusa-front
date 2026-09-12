@@ -71,14 +71,14 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
         <section className={`${sectionShell} pb-12 pt-6 md:pb-20 md:pt-10`}>
           <Link
             href={`/${lang}/#committees`}
-            className="inline-flex items-center gap-2 py-2 text-sm font-medium text-[#666] transition-colors hover:text-[#1285E5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1285E5]"
+            className="inline-flex items-center gap-2 py-2 text-sm font-medium text-[#666] transition-colors hover:text-[#0A66C2] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0A66C2]"
           >
             <ArrowLeftIcon className="h-4 w-4" aria-hidden="true" />
             {labels.all}
           </Link>
 
           <div className="mb-8 mt-8 max-w-5xl md:mb-10 md:mt-12">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1285E5]">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#0A66C2]">
               {labels.badge}
             </p>
             <h1 className="mt-4 text-balance text-[clamp(36px,5.5vw,76px)] font-semibold leading-[1.04] tracking-[-0.045em]">
@@ -108,7 +108,7 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
         >
           <div className="grid gap-7 border-b border-black/10 pb-12 md:grid-cols-[0.9fr_1.1fr] md:gap-16 md:pb-20">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1285E5]">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#0A66C2]">
                 {labels.about}
               </p>
               <h2
@@ -129,7 +129,7 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
                 href={committeeLeadTelegramLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-7 inline-flex items-center gap-3 rounded-full bg-[#1285E5] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#0873cc] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#1285E5]"
+                className="mt-7 inline-flex items-center gap-3 rounded-full bg-[#0A66C2] px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#0957a5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0A66C2]"
               >
                 {labels.contact}
                 <ArrowRightIcon className="h-4 w-4" aria-hidden="true" />
@@ -143,7 +143,7 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
           className={`${sectionShell} pb-16 md:pb-24`}
         >
           <div className="mb-7 md:mb-10">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1285E5]">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#0A66C2]">
               {labels.inside}
             </p>
             <h2
@@ -168,7 +168,7 @@ export default async function CommitteePage({ params }: CommitteePageProps) {
                   />
                 </div>
                 <figcaption className="mt-4 flex items-baseline gap-3 text-sm leading-relaxed text-[#666]">
-                  <span className="shrink-0 text-xs tabular-nums text-[#1285E5]" aria-hidden="true">
+                  <span className="shrink-0 text-xs tabular-nums text-[#0A66C2]" aria-hidden="true">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   {photo.alt}

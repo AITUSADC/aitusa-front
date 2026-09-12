@@ -24,8 +24,8 @@ export default function Button({
 
   const styles =
     variant === "white"
-      ? `${base} bg-white text-[#1285E5] hover:bg-[#1285E5] hover:text-white hover:border-white`
-      : `${base} bg-[#1285E5] text-white hover:bg-white hover:text-[#1285E5] hover:border-[#1285E5]`;
+      ? `${base} bg-white text-[#0A66C2] hover:bg-[#0A66C2] hover:text-white hover:border-white`
+      : `${base} bg-[#0A66C2] text-white hover:bg-white hover:text-[#0A66C2] hover:border-[#0A66C2]`;
 
   const combinedClassName = `${styles} ${className}`.trim();
 

@@ -53,7 +53,7 @@ export default function Footer({ labels }: FooterProps) {
           sizes="100vw"
           className="pointer-events-none object-cover object-center"
         />
-        <div className="pointer-events-none absolute inset-0 bg-[#1285E5]/10" />
+        <div className="pointer-events-none absolute inset-0 bg-[#0A66C2]/10" />
 
         <div className="relative w-full max-w-[1050px] rounded-[32px] border border-white/20 bg-black/10 px-5 py-10 text-center text-white shadow-2xl shadow-sky-950/20 backdrop-blur-md sm:rounded-[40px] sm:px-10 sm:py-14 lg:px-[140px] lg:py-20">
           <h3
@@ -74,7 +74,7 @@ export default function Footer({ labels }: FooterProps) {
             target="_blank"
             rel="noopener noreferrer"
             aria-describedby="footer-cta-description"
-            className="mx-auto mt-9 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#1285E5] shadow-lg shadow-sky-950/10 transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-white/40 sm:mt-10 sm:px-8 sm:py-4 sm:text-lg"
+            className="mx-auto mt-9 inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#0A66C2] shadow-lg shadow-sky-950/10 transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-white/40 sm:mt-10 sm:px-8 sm:py-4 sm:text-lg"
           >
             {labels.telegramButton}
             <PaperAirplaneIcon className="h-5 w-5" aria-hidden="true" />
@@ -82,7 +82,7 @@ export default function Footer({ labels }: FooterProps) {
         </div>
       </section>
 
-      <section className="bg-[linear-gradient(105deg,#82bee8_0%,#1285e5_15%,#edf6fc_48%,#f5f5f5_100%)] px-4 py-6 sm:px-6 sm:py-6 lg:px-20">
+      <section className="bg-[linear-gradient(105deg,#82bee8_0%,#0a66c2_15%,#edf6fc_48%,#f5f5f5_100%)] px-4 py-6 sm:px-6 sm:py-6 lg:px-20">
         <div className="mx-auto max-w-[1555px]">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
@@ -102,7 +102,7 @@ export default function Footer({ labels }: FooterProps) {
                   aria-label={link.label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 rounded-full bg-white/35 px-4 py-2.5 text-sm font-semibold transition hover:bg-white/65 hover:text-[#1285E5] focus:outline-none focus:ring-4 focus:ring-[#1285E5]/20"
+                  className="flex items-center gap-2 rounded-full bg-white/35 px-4 py-2.5 text-sm font-semibold transition hover:bg-white/65 hover:text-[#0A66C2] focus:outline-none focus:ring-4 focus:ring-[#0A66C2]/20"
                 >
                   {link.icon}
                   <span>{link.label}</span>

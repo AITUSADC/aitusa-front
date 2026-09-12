@@ -45,10 +45,10 @@ export default function LocaleSwitcher({
             className={`rounded-full px-2 py-1.5 transition-colors sm:px-2.5 ${
               isActive
                 ? solid
-                  ? "bg-white text-[#1285E5] shadow-sm md:bg-[#1285E5] md:text-white"
-                  : "bg-white text-[#1285E5] shadow-sm"
+                  ? "bg-white text-[#0A66C2] shadow-sm md:bg-[#0A66C2] md:text-white"
+                  : "bg-white text-[#0A66C2] shadow-sm"
                 : solid
-                  ? "text-white/75 hover:text-white md:text-[#666] md:hover:text-[#1285E5]"
+                  ? "text-white/75 hover:text-white md:text-[#666] md:hover:text-[#0A66C2]"
                   : "text-white/75 hover:text-white"
             }`}
           >
