@@ -5,6 +5,7 @@ export type Dictionary = {
   header: {
     home: string;
     clubs: string;
+    events: string;
     gallery: string;
     contacts: string;
     contact: string;
@@ -67,6 +68,25 @@ export type Dictionary = {
     error: string;
   };
   gallery: { title: string; description: string };
+  events: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    current: string;
+    currentDescription: string;
+    upcoming: string;
+    upcomingDescription: string;
+    past: string;
+    pastDescription: string;
+    currentBadge: string;
+    upcomingBadge: string;
+    pastBadge: string;
+    location: string;
+    emptyCurrent: string;
+    emptyUpcoming: string;
+    emptyPast: string;
+    error: string;
+  };
 };
 
 const en: Dictionary = {
@@ -77,6 +97,7 @@ const en: Dictionary = {
   header: {
     home: "Home",
     clubs: "Clubs",
+    events: "Events",
     gallery: "Gallery",
     contacts: "Contacts",
     contact: "Contact us",
@@ -146,6 +167,25 @@ const en: Dictionary = {
     title: "Gallery",
     description: "Photos and moments from AITUSA student life.",
   },
+  events: {
+    eyebrow: "AITUSA calendar",
+    title: "Events that bring us together",
+    description: "Discover what is happening now, plan your next campus experience, and revisit memorable moments from student life.",
+    current: "Happening now",
+    currentDescription: "Join events taking place across the AITU community today.",
+    upcoming: "Coming up",
+    upcomingDescription: "Save the date and be part of what happens next.",
+    past: "Past events",
+    pastDescription: "A look back at the ideas, people, and moments we shared.",
+    currentBadge: "Happening now",
+    upcomingBadge: "Upcoming",
+    pastBadge: "Completed",
+    location: "Location",
+    emptyCurrent: "There are no events happening right now.",
+    emptyUpcoming: "New events will be announced soon.",
+    emptyPast: "The event archive is currently empty.",
+    error: "We could not load the events. Please try again later.",
+  },
 };
 
 const ru: Dictionary = {
@@ -156,6 +196,7 @@ const ru: Dictionary = {
   header: {
     home: "Главная",
     clubs: "Клубы",
+    events: "События",
     gallery: "Галерея",
     contacts: "Контакты",
     contact: "Связаться",
@@ -225,6 +266,25 @@ const ru: Dictionary = {
     title: "Галерея",
     description: "Фотографии и моменты студенческой жизни AITUSA.",
   },
+  events: {
+    eyebrow: "Календарь AITUSA",
+    title: "События, которые объединяют",
+    description: "Узнавайте, что проходит сейчас, планируйте следующие события и вспоминайте яркие моменты студенческой жизни.",
+    current: "Проходят сейчас",
+    currentDescription: "Присоединяйтесь к мероприятиям, которые проходят в сообществе AITU прямо сейчас.",
+    upcoming: "Предстоящие события",
+    upcomingDescription: "Сохраните дату и станьте частью следующих событий.",
+    past: "Прошедшие события",
+    pastDescription: "Вспоминаем идеи, людей и моменты, которые нас объединили.",
+    currentBadge: "Сейчас",
+    upcomingBadge: "Скоро",
+    pastBadge: "Завершено",
+    location: "Место",
+    emptyCurrent: "Сейчас активных мероприятий нет.",
+    emptyUpcoming: "Новые мероприятия скоро появятся.",
+    emptyPast: "Архив мероприятий пока пуст.",
+    error: "Не удалось загрузить мероприятия. Попробуйте позже.",
+  },
 };
 
 const kk: Dictionary = {
@@ -235,6 +295,7 @@ const kk: Dictionary = {
   header: {
     home: "Басты бет",
     clubs: "Клубтар",
+    events: "Іс-шаралар",
     gallery: "Галерея",
     contacts: "Байланыс",
     contact: "Хабарласу",
@@ -303,6 +364,25 @@ const kk: Dictionary = {
   gallery: {
     title: "Галерея",
     description: "AITUSA студенттік өмірінің суреттері мен жарқын сәттері.",
+  },
+  events: {
+    eyebrow: "AITUSA күнтізбесі",
+    title: "Бізді біріктіретін іс-шаралар",
+    description: "Қазір өтіп жатқан іс-шараларды біліп, алдағы кездесулерді жоспарлап, студенттік өмірдің жарқын сәттерін еске алыңыз.",
+    current: "Қазір өтіп жатыр",
+    currentDescription: "AITU қауымдастығында дәл қазір өтіп жатқан іс-шараларға қосылыңыз.",
+    upcoming: "Алдағы іс-шаралар",
+    upcomingDescription: "Күнін белгілеп, келесі іс-шаралардың бір бөлігі болыңыз.",
+    past: "Өткен іс-шаралар",
+    pastDescription: "Бізді біріктірген идеяларды, адамдарды және сәттерді еске аламыз.",
+    currentBadge: "Қазір",
+    upcomingBadge: "Жақында",
+    pastBadge: "Аяқталды",
+    location: "Өтетін орны",
+    emptyCurrent: "Қазір өтіп жатқан іс-шаралар жоқ.",
+    emptyUpcoming: "Жаңа іс-шаралар жақында жарияланады.",
+    emptyPast: "Іс-шаралар мұрағаты әзірге бос.",
+    error: "Іс-шараларды жүктеу мүмкін болмады. Кейінірек қайталап көріңіз.",
   },
 };
 

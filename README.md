@@ -71,6 +71,21 @@ bun install
 
 ### 3. Run the Development Server
 
+Start PostgreSQL and apply the committed database migrations:
+
+```bash
+docker compose up -d db
+npm run db:deploy --workspace=@aitusa/api
+npm run db:seed --workspace=@aitusa/api
+```
+
+`db:deploy` applies versioned migrations and is the command teammates and
+deployments should use after pulling schema changes. `db:seed` is optional and
+adds development events for all three temporal states. The local API defaults
+to the credentials from `compose.yaml`; create `apps/api/.env` from
+`.env.example` and set `ADMIN_API_KEY` to enable event creation through the
+admin panel.
+
 Start the local development server:
 
 ```bash
@@ -101,9 +116,11 @@ This builds and starts both applications in production mode:
 - Backend health: [http://localhost:3001/api/health](http://localhost:3001/api/health)
 - API through the frontend: [http://localhost:3000/api/health](http://localhost:3000/api/health)
 
-The frontend waits for the API health check before starting. Both services restart automatically unless explicitly stopped. No database or other external service is currently required; the API serves mock data.
+Compose starts PostgreSQL, applies the committed Prisma migrations, starts the API, and waits for its health check before starting the frontend. The database, API, and frontend restart automatically unless explicitly stopped. PostgreSQL data persists in the `postgres_data` volume; `docker compose down` preserves it. Clubs use mock data, while events are stored in PostgreSQL.
 
 Compose works without an `.env` file. If a root `.env` exists, Compose reads `NEXT_PUBLIC_AITUSA_*` values from it and passes them to the frontend build. Missing values use the application's default contact links. Set `WEB_PORT` and `API_PORT` in that file to change the host ports (defaults: 3000 and 3001). Internal container ports stay fixed, and the frontend proxies `/api/*` to `http://api:3001` over the Compose network.
+
+Set `ADMIN_API_KEY` in the root `.env` to enable event creation in the admin panel. `DB_PORT` changes the PostgreSQL host port (default: 5432). The API and migration service use the internal database URL from `compose.yaml`.
 
 Public environment values and the API rewrite destination are embedded during the Next.js build. Re-run `docker compose up --build -d --wait` after changing code or public settings. Local `.env` files are excluded from the Docker build context. The first build needs internet access to download images, npm dependencies, and Google Fonts used by the frontend.
 
@@ -152,6 +169,8 @@ Your application has the following routes:
 | `/[lang]/clubs`             | Clubs listing - Browse all student clubs     |
 | `/[lang]/clubs/[club-name]` | Club detail - View specific club information |
 | `/[lang]/gallery`           | Gallery - View event photos and media        |
+| `/[lang]/events`            | Current, upcoming, and past events            |
+| `/ru/admin/events`          | Local event creation panel (API-key protected writes) |
 
 Backend API routes:
 
@@ -160,6 +179,8 @@ Backend API routes:
 | `/api/health`                   | Backend health check           |
 | `/api/clubs-mock-data?lang=ru`  | Localized clubs list           |
 | `/api/club-mock-data?slug=...`  | Club details by slug           |
+| `/api/events?lang=ru`            | Published localized events     |
+| `POST /api/admin/events`          | Create an event with an admin API key |
 
 The frontend uses the same `/api/...` paths. Next.js rewrites those requests to the NestJS backend configured by `API_URL` (defaults to `http://localhost:3001`).
 
@@ -247,6 +268,8 @@ The frontend runs on [http://localhost:3000](http://localhost:3000), and the bac
 | `npm run dev:web`   | Start only the Next.js frontend          |
 | `npm run dev:api`   | Start only the NestJS backend            |
 | `npm run build`     | Build all workspaces                      |
+| `npm run db:deploy --workspace=@aitusa/api` | Apply committed database migrations |
+| `npm run db:seed --workspace=@aitusa/api` | Add optional development event data |
 | `npm start`         | Run both production builds               |
 | `npm run lint`      | Run ESLint in all workspaces              |
 | `npm run typecheck` | Check TypeScript in all workspaces        |

@@ -1,14 +1,21 @@
 # syntax=docker/dockerfile:1
 FROM node:24-bookworm-slim AS base
 WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends openssl \
+    && rm -rf /var/lib/apt/lists/*
 
 FROM base AS manifests
 COPY package.json package-lock.json ./
 COPY apps/api/package.json ./apps/api/package.json
 COPY apps/web/package.json ./apps/web/package.json
 
-FROM manifests AS builder
+FROM manifests AS migration
 RUN npm ci --workspace=@aitusa/api --include-workspace-root=false
+COPY apps/api/prisma ./apps/api/prisma
+COPY apps/api/prisma.config.ts ./apps/api/prisma.config.ts
+CMD ["npm", "run", "db:deploy", "--workspace=@aitusa/api"]
+
+FROM migration AS builder
 COPY apps/api ./apps/api
 RUN npm run build --workspace=@aitusa/api
 
