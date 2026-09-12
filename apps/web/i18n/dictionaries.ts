@@ -56,16 +56,8 @@ export type Dictionary = {
     search: string;
     options: { all: string; sports: string; strategy: string; literature: string };
     removeFilter: string;
-    openCall: string;
-    joinNow: string;
-    goals: string;
     memories: string;
     memoryAlt: string;
-    archive: string;
-    looking: string;
-    membershipTitle: string;
-    membershipDescription: string;
-    membershipButton: string;
     loading: string;
     error: string;
   };
@@ -153,16 +145,8 @@ const en: Dictionary = {
     search: "Search",
     options: { all: "All", sports: "Sports", strategy: "Strategy", literature: "Literature" },
     removeFilter: "Remove",
-    openCall: "Open call",
-    joinNow: "Join now",
-    goals: "Key goals",
     memories: "Memorable moments",
     memoryAlt: "Club memory",
-    archive: "View the event archive",
-    looking: "We are looking for",
-    membershipTitle: "New team members",
-    membershipDescription: "Join the club team, contribute to real projects, and grow together with the community.",
-    membershipButton: "Apply",
     loading: "Loading club...",
     error: "We could not load this club.",
   },
@@ -250,16 +234,8 @@ const ru: Dictionary = {
     search: "Найти",
     options: { all: "Все", sports: "Спорт", strategy: "Стратегия", literature: "Литература" },
     removeFilter: "Удалить",
-    openCall: "Набор открыт",
-    joinNow: "Присоединиться",
-    goals: "Ключевые цели",
     memories: "Яркие моменты",
     memoryAlt: "Момент из жизни клуба",
-    archive: "Посмотреть архив событий",
-    looking: "Мы ищем",
-    membershipTitle: "Новых участников",
-    membershipDescription: "Станьте частью команды клуба, участвуйте в реальных проектах и развивайтесь вместе с сообществом.",
-    membershipButton: "Подать заявку",
     loading: "Загружаем клуб...",
     error: "Не удалось загрузить информацию о клубе.",
   },
@@ -347,16 +323,8 @@ const kk: Dictionary = {
     search: "Іздеу",
     options: { all: "Барлығы", sports: "Спорт", strategy: "Стратегия", literature: "Әдебиет" },
     removeFilter: "Жою",
-    openCall: "Қабылдау ашық",
-    joinNow: "Қосылу",
-    goals: "Негізгі мақсаттар",
     memories: "Жарқын сәттер",
     memoryAlt: "Клуб өмірінен сәт",
-    archive: "Іс-шаралар мұрағатын көру",
-    looking: "Біз іздейміз",
-    membershipTitle: "Жаңа қатысушыларды",
-    membershipDescription: "Клуб командасына қосылып, нақты жобаларға үлес қосыңыз және қауымдастықпен бірге дамыңыз.",
-    membershipButton: "Өтінім беру",
     loading: "Клуб жүктелуде...",
     error: "Клуб туралы ақпаратты жүктеу мүмкін болмады.",
   },
