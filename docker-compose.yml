@@ -1,0 +1,59 @@
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: aitusa
+      POSTGRES_USER: aitusa
+      POSTGRES_PASSWORD: aitusa
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aitusa -d aitusa"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    restart: unless-stopped
+    environment:
+      API_PORT: 3001
+      DATABASE_URL: postgresql://aitusa:aitusa@db:5432/aitusa?schema=public
+      ADMIN_API_KEY: ${ADMIN_API_KEY:-}
+    ports:
+      - "3001:3001"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+      target: migration
+    environment:
+      DATABASE_URL: postgresql://aitusa:aitusa@db:5432/aitusa?schema=public
+    command: npm run db:deploy --workspace=@aitusa/api
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    restart: unless-stopped
+    environment:
+      API_URL: http://api:3001
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
