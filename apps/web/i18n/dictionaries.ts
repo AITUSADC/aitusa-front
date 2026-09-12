@@ -4,6 +4,7 @@ export type Dictionary = {
   metadata: { title: string; description: string };
   header: {
     home: string;
+    committees: string;
     clubs: string;
     events: string;
     gallery: string;
@@ -96,6 +97,7 @@ const en: Dictionary = {
   },
   header: {
     home: "Home",
+    committees: "Committees",
     clubs: "Clubs",
     events: "Events",
     gallery: "Gallery",
@@ -195,6 +197,7 @@ const ru: Dictionary = {
   },
   header: {
     home: "Главная",
+    committees: "Комитеты",
     clubs: "Клубы",
     events: "События",
     gallery: "Галерея",
@@ -294,6 +297,7 @@ const kk: Dictionary = {
   },
   header: {
     home: "Басты бет",
+    committees: "Комитеттер",
     clubs: "Клубтар",
     events: "Іс-шаралар",
     gallery: "Галерея",

@@ -23,6 +23,7 @@ export default function Header({
     const isTransparent = variant === "transparent";
     const navLinks = [
       { label: labels.home, href: `/${locale}` },
+      { label: labels.committees, href: `/${locale}/#committees` },
       { label: labels.clubs, href: `/${locale}/clubs` },
       { label: labels.events, href: `/${locale}/events` },
       { label: labels.gallery, href: `/${locale}/gallery` },
@@ -39,7 +40,7 @@ export default function Header({
                 ${
                   isTransparent && !isOpen
                     ? "absolute top-0 left-0 right-0 bg-transparent"
-                    : "relative bg-[#1285E5] md:bg-[#f5f5f5] border-b border-gray-100"
+                    : "relative bg-[#1285E5] xl:bg-[#f5f5f5] border-b border-gray-100"
                 }
             `}
       >
@@ -51,7 +52,7 @@ export default function Header({
               className={`h-10 w-auto sm:h-[52px] ${
                 isTransparent || isOpen
                   ? "block"
-                  : "block md:hidden"
+                  : "block xl:hidden"
               }`}
             />
             {!isTransparent && !isOpen && (
@@ -59,12 +60,12 @@ export default function Header({
                 src="/aitu_blue.svg"
                 alt=""
                 aria-hidden="true"
-                className="hidden h-10 w-auto sm:h-[52px] md:block"
+                className="hidden h-10 w-auto sm:h-[52px] xl:block"
               />
             )}
           </Link>
 
-          <nav className="hidden md:flex items-center gap-6 lg:gap-10">
+          <nav className="hidden xl:flex items-center gap-6 2xl:gap-10">
             {navLinks.map((link) => (
               <Link
                 key={link.label}
@@ -104,7 +105,7 @@ export default function Header({
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? labels.closeMenu : labels.openMenu}
               aria-expanded={isOpen}
-              className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 focus:outline-none"
+              className="xl:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 focus:outline-none"
             >
               <span
                 className={`h-0.5 w-6 bg-white transition-all duration-300 ${isOpen ? "rotate-45 translate-y-2" : ""}`}
@@ -124,13 +125,13 @@ export default function Header({
           className={`pointer-events-none absolute inset-x-0 bottom-0 h-px ${
             isTransparent || isOpen
               ? "bg-white/25"
-              : "bg-white/25 md:bg-[#1285E5]/20"
+              : "bg-white/25 xl:bg-[#1285E5]/20"
           }`}
         />
 
         <div
           className={`
-                    fixed inset-0 bg-[#1285E5] z-[105] flex flex-col items-center justify-center gap-8 transition-transform duration-500 md:hidden
+                    fixed inset-0 bg-[#1285E5] z-[105] flex flex-col items-center justify-center gap-8 transition-transform duration-500 xl:hidden
                     ${isOpen ? "translate-y-0" : "-translate-y-full"}
                 `}
         >

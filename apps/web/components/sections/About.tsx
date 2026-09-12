@@ -1,5 +1,4 @@
 import Button from "@/components/ui/Button";
-import { contactLinks } from "@/data/contacts";
 import type { Dictionary } from "@/i18n/dictionaries";
 
 type HeroProps = {
@@ -46,9 +45,8 @@ export default function Hero({ labels }: HeroProps) {
 
                 <div className="mt-8">
                     <Button
-                        href={contactLinks.telegramContact}
+                        href="#committees"
                         variant="white"
-                        target="_blank"
                     >
                         {labels.join}
                     </Button>
