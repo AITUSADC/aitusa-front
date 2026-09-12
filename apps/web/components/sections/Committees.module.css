@@ -7,7 +7,10 @@
 .card {
   position: relative;
   display: flex;
+  width: 100%;
   min-width: 0;
+  min-height: 200px;
+  aspect-ratio: 1;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid rgb(0 0 0 / 6%);
@@ -27,15 +30,14 @@
 .card:active { border-color: #1285e5; }
 
 .artwork {
-  position: relative;
-  aspect-ratio: 16 / 9;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
   background: #eaf4fb;
 }
 
 .blue .artwork { background: #3182ce; }
-.wide { grid-column: 1 / -1; }
-.wide .artwork { aspect-ratio: 32 / 9; }
+.wide { grid-column: 1 / -1; aspect-ratio: 2; }
 .image { object-fit: cover; }
 
 .content {
@@ -43,8 +45,9 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 18px;
-  padding: 16px 14px 14px;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px;
 }
 
 .title {
@@ -59,7 +62,6 @@
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  margin-top: auto;
   color: #1285e5;
   font-size: 12px;
   font-weight: 600;
@@ -67,11 +69,14 @@
 
 .arrow { width: 18px; height: 18px; flex-shrink: 0; }
 .overlay { display: none; }
+.blue .title, .blue .details { color: #fff; }
 
 @media (max-width: 359px) {
-  .grid { grid-template-columns: minmax(0, 1fr); }
-  .card { display: grid; grid-template-columns: 76px minmax(0, 1fr); min-height: 140px; }
-  .artwork, .wide .artwork { aspect-ratio: auto; }
+  .grid { gap: 10px; }
+  .card { min-height: 180px; border-radius: 18px; }
+  .content { padding: 12px; }
+  .title { font-size: 13px; }
+  .details { font-size: 11px; }
 }
 
 @media (min-width: 768px) {
@@ -85,17 +90,13 @@
 @media (min-width: 1024px) {
   .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .wide { grid-column: span 2; }
-  .wide .artwork { aspect-ratio: 32 / 9; }
 }
 
 /* Only mouse-like pointers reveal content on hover. Touch keeps the label visible. */
 @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
   .card { aspect-ratio: 1; min-height: 280px; transition: transform 200ms ease; }
   .wide { aspect-ratio: auto; }
-  .artwork, .wide .artwork { position: absolute; inset: 0; aspect-ratio: auto; }
   .content { justify-content: flex-end; gap: 12px; transition: opacity 200ms ease; }
-  .details { margin-top: 0; }
-  .blue .title, .blue .details { color: #fff; }
   .overlay {
     position: absolute;
     inset: 0;

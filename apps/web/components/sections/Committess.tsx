@@ -37,7 +37,7 @@ export default function Committees({ locale, labels }: CommitteesProps) {
                 src={committee.imageUrl}
                 alt=""
                 fill
-                sizes={committee.wide ? "(min-width: 1024px) 50vw, 50vw" : "(min-width: 1024px) 25vw, 50vw"}
+                sizes={committee.wide ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
                 className={styles.image}
               />
             </div>
