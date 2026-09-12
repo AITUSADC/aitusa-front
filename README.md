@@ -7,6 +7,7 @@ A modern Next.js web application for the AITU Student Association (AITUSA). This
 - [Project Overview](#project-overview)
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
+- [Docker Compose](#docker-compose)
 - [Project Structure](#project-structure)
 - [Available Routes](#available-routes)
 - [Development Workflow](#development-workflow)
@@ -85,6 +86,34 @@ The server automatically reloads when you save changes to your files (hot reload
 - Edit pages by modifying files in the `apps/web/app/` directory
 - Edit components in the `apps/web/components/` directory
 - Changes are reflected immediately in your browser
+
+## Docker Compose
+
+Install and start Docker Desktop (or Docker Engine with the Compose plugin on Linux), then run from the repository root:
+
+```bash
+docker compose up --build -d --wait
+```
+
+This builds and starts both applications in production mode:
+
+- Frontend: [http://localhost:3000](http://localhost:3000)
+- Backend health: [http://localhost:3001/api/health](http://localhost:3001/api/health)
+- API through the frontend: [http://localhost:3000/api/health](http://localhost:3000/api/health)
+
+The frontend waits for the API health check before starting. Both services restart automatically unless explicitly stopped. No database or other external service is currently required; the API serves mock data.
+
+Compose works without an `.env` file. If a root `.env` exists, Compose reads `NEXT_PUBLIC_AITUSA_*` values from it and passes them to the frontend build. Missing values use the application's default contact links. Set `WEB_PORT` and `API_PORT` in that file to change the host ports (defaults: 3000 and 3001). Internal container ports stay fixed, and the frontend proxies `/api/*` to `http://api:3001` over the Compose network.
+
+Public environment values and the API rewrite destination are embedded during the Next.js build. Re-run `docker compose up --build -d --wait` after changing code or public settings. Local `.env` files are excluded from the Docker build context. The first build needs internet access to download images, npm dependencies, and Google Fonts used by the frontend.
+
+```bash
+docker compose ps             # Service status and health
+docker compose logs -f        # Follow logs (Ctrl+C to exit)
+docker compose down           # Stop and remove containers
+```
+
+For development with hot reload, use `npm run dev` as described above.
 
 ## Project Structure
 

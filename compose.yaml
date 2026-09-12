@@ -1,0 +1,47 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      API_PORT: "3001"
+    ports:
+      - "${API_PORT:-3001}:3001"
+    restart: unless-stopped
+    init: true
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3001/api/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      start_period: 20s
+      retries: 5
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        API_URL: http://api:3001
+        NEXT_PUBLIC_AITUSA_TELEGRAM_CONTACT: ${NEXT_PUBLIC_AITUSA_TELEGRAM_CONTACT:-}
+        NEXT_PUBLIC_AITUSA_TELEGRAM: ${NEXT_PUBLIC_AITUSA_TELEGRAM:-}
+        NEXT_PUBLIC_AITUSA_INSTAGRAM: ${NEXT_PUBLIC_AITUSA_INSTAGRAM:-}
+        NEXT_PUBLIC_AITUSA_TELEGRAM_SOCIAL_LEAD: ${NEXT_PUBLIC_AITUSA_TELEGRAM_SOCIAL_LEAD:-}
+        NEXT_PUBLIC_AITUSA_TELEGRAM_MEDIA_LEAD: ${NEXT_PUBLIC_AITUSA_TELEGRAM_MEDIA_LEAD:-}
+        NEXT_PUBLIC_AITUSA_TELEGRAM_CULTURE_LEAD: ${NEXT_PUBLIC_AITUSA_TELEGRAM_CULTURE_LEAD:-}
+        NEXT_PUBLIC_AITUSA_TELEGRAM_EXTERNAL_RELATIONS_LEAD: ${NEXT_PUBLIC_AITUSA_TELEGRAM_EXTERNAL_RELATIONS_LEAD:-}
+        NEXT_PUBLIC_AITUSA_TELEGRAM_ACADEMIC_LEAD: ${NEXT_PUBLIC_AITUSA_TELEGRAM_ACADEMIC_LEAD:-}
+        NEXT_PUBLIC_AITUSA_TELEGRAM_DIGITAL_LEAD: ${NEXT_PUBLIC_AITUSA_TELEGRAM_DIGITAL_LEAD:-}
+        NEXT_PUBLIC_AITUSA_TELEGRAM_SCIENCE_LEAD: ${NEXT_PUBLIC_AITUSA_TELEGRAM_SCIENCE_LEAD:-}
+    ports:
+      - "${WEB_PORT:-3000}:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+    init: true
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
