@@ -114,7 +114,7 @@ const en: Dictionary = {
       members: [
         { name: "Ainaz Zhubanazarova", role: "President of the student government", brand: "AITUSA" },
         { name: "Linara Yermekova", role: "Vice President for Social and Cultural Affairs" },
-        { name: "Asylkhan Toilybekov", role: "Vice President for Science and Academic Affairs" },
+        { name: "Assylkhan Toilybekov", role: "Vice President for Science and Academic Affairs" },
       ],
       eyebrow: "About us",
       revealText: "Want to organize events, support students, create content or build partnerships?",
