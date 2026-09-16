@@ -238,7 +238,7 @@ export default function Team({ labels }: TeamProps) {
                                 <p style={op} className="max-w-[440px] text-pretty">
                                     {member.role}
                                     {member.brand && (
-                                        <> <span style={{color: '#0A66C2'}}>&quot;{member.brand}&quot;</span></>
+                                        <> <span style={{color: '#1285E5'}}>&quot;{member.brand}&quot;</span></>
                                     )}
                                 </p>
                             </div>

@@ -7,7 +7,7 @@ type HeroProps = {
 
 export default function Hero({ labels }: HeroProps) {
     return (
-        <section className="relative w-full min-h-screen overflow-hidden flex items-center justify-center bg-[#0A66C2]">
+        <section className="relative w-full min-h-screen overflow-hidden flex items-center justify-center bg-[#1285E5]">
 
              <img
                 src="/Back.svg"

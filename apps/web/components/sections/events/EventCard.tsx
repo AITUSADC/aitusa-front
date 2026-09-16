@@ -72,8 +72,8 @@ export default function EventCard({
         <span
           className={`absolute left-5 top-5 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.12em] backdrop-blur-md md:left-7 md:top-7 ${
             event.temporalStatus === "current"
-              ? "bg-[#0A66C2] text-white"
-              : "bg-white/90 text-[#0A66C2]"
+              ? "bg-[#1285E5] text-white"
+              : "bg-white/90 text-[#1285E5]"
           }`}
         >
           {badge}
@@ -83,11 +83,11 @@ export default function EventCard({
       <div className={`flex flex-1 flex-col ${featured ? "p-7 md:p-10 lg:p-14" : "p-6 md:p-8"}`}>
         <div className="space-y-3 text-sm font-medium text-[#666]">
           <p className="flex items-start gap-2.5">
-            <CalendarDaysIcon className="mt-0.5 h-5 w-5 shrink-0 text-[#0A66C2]" aria-hidden="true" />
+            <CalendarDaysIcon className="mt-0.5 h-5 w-5 shrink-0 text-[#1285E5]" aria-hidden="true" />
             <span>{formatEventDate(event, locale)}</span>
           </p>
           <p className="flex items-start gap-2.5">
-            <MapPinIcon className="mt-0.5 h-5 w-5 shrink-0 text-[#0A66C2]" aria-hidden="true" />
+            <MapPinIcon className="mt-0.5 h-5 w-5 shrink-0 text-[#1285E5]" aria-hidden="true" />
             <span><span className="sr-only">{labels.location}: </span>{event.location}</span>
           </p>
         </div>

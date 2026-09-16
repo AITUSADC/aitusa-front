@@ -21,12 +21,12 @@ export default async function AdminEventsPage({
     <main className="min-h-screen bg-[#f5f5f5] [&+footer]:hidden">
       <header className="border-b border-black/5 bg-white">
         <div className="mx-auto flex w-full max-w-[1480px] items-center justify-between px-5 py-5 md:px-10 lg:px-16">
-          <Link href={`/${lang}`} className="text-xl font-bold tracking-[-0.04em] text-[#0A66C2]">
+          <Link href={`/${lang}`} className="text-xl font-bold tracking-[-0.04em] text-[#1285E5]">
             AITUSA
           </Link>
           <Link
             href={`/${lang}/events`}
-            className="rounded-full border border-[#0A66C2]/25 px-5 py-2 text-sm font-semibold text-[#0A66C2] transition hover:bg-[#0A66C2] hover:text-white"
+            className="rounded-full border border-[#1285E5]/25 px-5 py-2 text-sm font-semibold text-[#1285E5] transition hover:bg-[#1285E5] hover:text-white"
           >
             Открыть Events
           </Link>
@@ -35,7 +35,7 @@ export default async function AdminEventsPage({
 
       <section className="mx-auto w-full max-w-[1480px] px-5 py-12 md:px-10 md:py-16 lg:px-16">
         <div className="mb-10 max-w-4xl md:mb-14">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#0A66C2]">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1285E5]">
             Панель управления
           </p>
           <h1 className="mt-4 text-[clamp(42px,6vw,82px)] font-semibold leading-[0.95] tracking-[-0.055em]">

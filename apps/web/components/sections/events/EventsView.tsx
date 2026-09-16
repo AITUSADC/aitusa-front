@@ -33,7 +33,7 @@ export default function EventsView({ events, locale, labels, hasError = false }:
 
   return (
     <main>
-      <section className="overflow-hidden bg-[#0A66C2] text-white">
+      <section className="overflow-hidden bg-[#1285E5] text-white">
         <div className={`${sectionShell} py-20 md:py-28 lg:py-36`}>
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-white/70">{labels.eyebrow}</p>
           <h1 className="mt-6 max-w-[1250px] text-balance text-[clamp(48px,8vw,122px)] font-semibold leading-[0.92] tracking-[-0.055em]">

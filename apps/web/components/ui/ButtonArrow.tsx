@@ -51,8 +51,8 @@ export default function ButtonArrow({
 
   const variantStyles =
     variant === "white"
-      ? "bg-[#f5f5f5] text-black hover:bg-[#0A66C2] hover:text-[#f5f5f5] hover:border-white focus-visible:ring-white/40"
-      : "bg-[#0A66C2] text-white hover:bg-white hover:text-[#0A66C2] hover:border-[#0A66C2] focus-visible:ring-[#0A66C2]/30";
+      ? "bg-[#f5f5f5] text-black hover:bg-[#1285E5] hover:text-[#f5f5f5] hover:border-white focus-visible:ring-white/40"
+      : "bg-[#1285E5] text-white hover:bg-white hover:text-[#1285E5] hover:border-[#1285E5] focus-visible:ring-[#1285E5]/30";
 
   const styles = cn(base, sizeStyles, variantStyles, className);
   const iconStyles = cn(defaultIconSize, iconClassName);
