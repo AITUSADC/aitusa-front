@@ -86,10 +86,10 @@ export default function Footer({ labels }: FooterProps) {
         <div className="mx-auto max-w-[1555px]">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-base font-semibold text-white sm:text-lg">
+              <p className="text-base font-semibold text-[#444] sm:text-lg">
                 {labels.online}
               </p>
-              <p className="mt-1 text-sm text-white/75">
+              <p className="mt-1 text-sm text-[#444]">
                 {labels.socialDescription}
               </p>
             </div>
